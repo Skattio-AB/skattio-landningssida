@@ -1,17 +1,26 @@
 import type { Metadata } from "next";
-import { Plus_Jakarta_Sans, IBM_Plex_Sans } from "next/font/google";
+import { Inter } from "next/font/google";
+import localFont from "next/font/local";
 import "./globals.css";
 import { siteConfig } from "@/config/site";
 
-const plusJakarta = Plus_Jakarta_Sans({
+const satoshi = localFont({
+  src: [
+    {
+      path: "../../public/fonts/Satoshi-Variable.woff2",
+      style: "normal",
+    },
+    {
+      path: "../../public/fonts/Satoshi-VariableItalic.woff2",
+      style: "italic",
+    },
+  ],
   variable: "--font-display",
-  subsets: ["latin"],
   display: "swap",
 });
 
-const ibmPlex = IBM_Plex_Sans({
+const inter = Inter({
   variable: "--font-body",
-  weight: ["400", "500", "600", "700"],
   subsets: ["latin"],
   display: "swap",
 });
@@ -59,7 +68,7 @@ export default function RootLayout({
   return (
     <html lang="sv" className="scroll-smooth">
       <body
-        className={`${plusJakarta.variable} ${ibmPlex.variable} font-sans antialiased`}
+        className={`${satoshi.variable} ${inter.variable} font-sans antialiased`}
       >
         {children}
       </body>

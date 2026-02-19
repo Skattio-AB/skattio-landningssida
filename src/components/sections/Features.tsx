@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { fadeUp, staggerContainer } from "@/lib/animations";
+import { scaleUp, fadeUp, staggerContainer } from "@/lib/animations";
 import {
   Home,
   Clock,
@@ -52,7 +52,7 @@ const features = [
 
 export function Features() {
   return (
-    <section id="funktioner" className="bg-surface py-20 sm:py-28">
+    <section id="funktioner" className="bg-navy-50 py-20 sm:py-28">
       <div className="mx-auto max-w-6xl px-6">
         <motion.div
           initial="hidden"
@@ -61,10 +61,10 @@ export function Features() {
           variants={fadeUp}
           className="text-center"
         >
-          <h2 className="font-heading text-3xl font-bold tracking-tight text-text-primary sm:text-4xl">
+          <h2 className="font-heading text-3xl font-bold tracking-tight text-neutral-950 sm:text-4xl">
             Allt du behöver för din deklaration
           </h2>
-          <p className="mx-auto mt-4 max-w-xl text-text-secondary">
+          <p className="mx-auto mt-4 max-w-xl text-neutral-600 leading-relaxed">
             Skattio hjälper dig med bostadsförsäljning idag — och fler
             deklarationstjänster imorgon.
           </p>
@@ -75,21 +75,21 @@ export function Features() {
           whileInView="visible"
           viewport={{ once: true, margin: "-100px" }}
           variants={staggerContainer}
-          className="mt-16 grid gap-6 sm:grid-cols-2 lg:grid-cols-3"
+          className="mt-16 grid gap-5 sm:grid-cols-2 lg:grid-cols-3"
         >
           {features.map((feature) => (
             <motion.div
               key={feature.title}
-              variants={fadeUp}
-              className="rounded-xl border border-border bg-white p-6 transition-shadow hover:shadow-md"
+              variants={scaleUp}
+              className="group rounded-xl border border-neutral-200/80 bg-white p-6 shadow-[0_1px_3px_rgba(10,15,30,0.04),0_1px_2px_rgba(10,15,30,0.02)] transition-all duration-300 hover:shadow-[0_4px_16px_rgba(10,15,30,0.08),0_2px_4px_rgba(10,15,30,0.04)] hover:border-neutral-300"
             >
-              <div className="mb-4 flex h-10 w-10 items-center justify-center rounded-lg bg-brand-50 text-brand-600">
+              <div className="mb-4 flex h-11 w-11 items-center justify-center rounded-lg bg-navy-50 text-navy-700 transition-colors duration-300 group-hover:bg-navy-100">
                 <feature.icon className="h-5 w-5" />
               </div>
-              <h3 className="font-heading text-base font-semibold text-text-primary">
+              <h3 className="font-heading text-base font-semibold text-neutral-950">
                 {feature.title}
               </h3>
-              <p className="mt-2 text-sm text-text-secondary leading-relaxed">
+              <p className="mt-2 text-sm text-neutral-600 leading-relaxed">
                 {feature.description}
               </p>
             </motion.div>

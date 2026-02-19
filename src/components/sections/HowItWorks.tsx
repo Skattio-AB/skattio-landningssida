@@ -7,18 +7,21 @@ import { ClipboardList, ScanSearch, Download } from "lucide-react";
 const steps = [
   {
     icon: ClipboardList,
+    number: "01",
     title: "Svara på frågor",
     description:
       "Vår guidade wizard tar dig steg för steg genom alla uppgifter som behövs. Inget krångel, bara enkla frågor.",
   },
   {
     icon: ScanSearch,
+    number: "02",
     title: "Granska med AI-stöd",
     description:
       "Vårt AI-stöd hjälper dig att dubbelkolla allt. Ställ frågor direkt i wizarden om du undrar något.",
   },
   {
     icon: Download,
+    number: "03",
     title: "Ladda ner & skicka in",
     description:
       "Ladda ner färdig blankett som PDF eller SRU-fil och importera direkt i Skatteverkets e-tjänst.",
@@ -36,10 +39,10 @@ export function HowItWorks() {
           variants={fadeUp}
           className="text-center"
         >
-          <h2 className="font-heading text-3xl font-bold tracking-tight text-text-primary sm:text-4xl">
+          <h2 className="font-heading text-3xl font-bold tracking-tight text-neutral-950 sm:text-4xl">
             Så funkar det
           </h2>
-          <p className="mx-auto mt-4 max-w-xl text-text-secondary">
+          <p className="mx-auto mt-4 max-w-xl text-neutral-600 leading-relaxed">
             Tre enkla steg från start till färdig deklaration.
           </p>
         </motion.div>
@@ -49,7 +52,7 @@ export function HowItWorks() {
           whileInView="visible"
           viewport={{ once: true, margin: "-100px" }}
           variants={staggerContainer}
-          className="mt-16 grid gap-8 sm:grid-cols-3"
+          className="mt-16 grid gap-10 sm:grid-cols-3 sm:gap-8"
         >
           {steps.map((step, i) => (
             <motion.div
@@ -57,20 +60,27 @@ export function HowItWorks() {
               variants={fadeUp}
               className="relative flex flex-col items-center text-center"
             >
-              {/* Step number */}
-              <div className="mb-4 flex h-14 w-14 items-center justify-center rounded-2xl bg-brand-50 text-brand-600">
-                <step.icon className="h-6 w-6" />
+              {/* Step number + icon */}
+              <div className="relative mb-6">
+                <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-navy-50 text-navy-700">
+                  <step.icon className="h-6 w-6" />
+                </div>
+                <span className="absolute -top-2 -right-2 flex h-6 w-6 items-center justify-center rounded-full bg-navy-900 text-[10px] font-bold text-white font-heading">
+                  {step.number}
+                </span>
               </div>
 
               {/* Connector line (between steps, desktop only) */}
               {i < steps.length - 1 && (
-                <div className="absolute top-7 left-[calc(50%+40px)] hidden h-px w-[calc(100%-80px)] bg-border sm:block" />
+                <div className="absolute top-7 left-[calc(50%+44px)] hidden h-px w-[calc(100%-88px)] sm:block">
+                  <div className="h-full w-full border-t border-dashed border-neutral-300" />
+                </div>
               )}
 
-              <h3 className="font-heading text-lg font-semibold text-text-primary">
+              <h3 className="font-heading text-lg font-semibold text-neutral-950">
                 {step.title}
               </h3>
-              <p className="mt-2 text-sm text-text-secondary leading-relaxed">
+              <p className="mt-2 max-w-xs text-sm text-neutral-600 leading-relaxed">
                 {step.description}
               </p>
             </motion.div>

@@ -27,10 +27,10 @@ export function Pricing() {
           variants={fadeUp}
           className="text-center"
         >
-          <h2 className="font-heading text-3xl font-bold tracking-tight text-text-primary sm:text-4xl">
+          <h2 className="font-heading text-3xl font-bold tracking-tight text-neutral-950 sm:text-4xl">
             Enkel prissättning
           </h2>
-          <p className="mx-auto mt-4 max-w-xl text-text-secondary">
+          <p className="mx-auto mt-4 max-w-xl text-neutral-600 leading-relaxed">
             En bråkdel av vad en skatteexpert kostar.
           </p>
         </motion.div>
@@ -40,38 +40,43 @@ export function Pricing() {
           whileInView="visible"
           viewport={{ once: true, margin: "-100px" }}
           variants={fadeUp}
-          className="mx-auto mt-12 max-w-md"
+          className="mx-auto mt-14 max-w-md"
         >
-          <div className="relative rounded-2xl border-2 border-brand-200 bg-white p-8 shadow-md">
-            <Badge className="absolute -top-3 left-1/2 -translate-x-1/2 bg-brand-600 text-white hover:bg-brand-600">
+          <div className="relative overflow-hidden rounded-2xl border-2 border-accent-500 bg-white p-8 shadow-[0_8px_30px_rgba(10,15,30,0.12),0_2px_8px_rgba(10,15,30,0.06)]">
+            {/* Top accent gradient strip */}
+            <div className="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-accent-500 via-accent-400 to-accent-500" />
+
+            <Badge className="absolute -top-3 left-1/2 -translate-x-1/2 bg-accent-500 text-white hover:bg-accent-500 shadow-sm">
               Lanseringspris
             </Badge>
 
-            <div className="text-center">
-              <p className="text-sm font-medium text-text-secondary">
+            <div className="mt-2 text-center">
+              <p className="text-sm font-medium text-neutral-600">
                 Bostadsförsäljning (K5/K6)
               </p>
-              <div className="mt-4 flex items-baseline justify-center gap-2">
-                <span className="text-4xl font-bold font-heading text-text-primary">
+              <div className="mt-4 flex items-baseline justify-center gap-1.5">
+                <span className="font-heading text-5xl font-bold leading-[1.1] text-neutral-950">
                   1 499
                 </span>
-                <span className="text-text-secondary">kr</span>
+                <span className="text-lg font-medium text-neutral-500">kr</span>
               </div>
-              <p className="mt-1 text-sm text-text-muted line-through">
+              <p className="mt-1.5 text-sm text-neutral-400 line-through">
                 2 499 kr ordinarie pris
               </p>
-              <p className="mt-4 text-sm text-text-secondary">
+              <p className="mt-4 text-sm text-neutral-600">
                 Jämfört med 5 000–15 000 kr hos skatteexpert
               </p>
             </div>
 
-            <ul className="mt-8 space-y-3">
+            <div className="my-8 h-px bg-neutral-100" />
+
+            <ul className="space-y-3.5">
               {included.map((item) => (
                 <li
                   key={item}
-                  className="flex items-start gap-3 text-sm text-text-primary"
+                  className="flex items-start gap-3 text-sm text-neutral-800"
                 >
-                  <Check className="mt-0.5 h-4 w-4 shrink-0 text-brand-600" />
+                  <Check className="mt-0.5 h-4 w-4 shrink-0 text-success" />
                   {item}
                 </li>
               ))}
@@ -80,7 +85,7 @@ export function Pricing() {
             <Button
               asChild
               size="lg"
-              className="mt-8 w-full bg-brand-600 hover:bg-brand-700 text-white h-12 text-base"
+              className="mt-8 w-full bg-accent-500 hover:bg-accent-600 text-white h-12 text-base shadow-md hover:shadow-lg transition-all duration-200"
             >
               <a href={siteConfig.links.app}>
                 Kom igång
@@ -88,7 +93,7 @@ export function Pricing() {
               </a>
             </Button>
 
-            <p className="mt-4 text-center text-xs text-text-muted">
+            <p className="mt-4 text-center text-xs text-neutral-500">
               Du betalar först när du laddar ner blanketten.
             </p>
           </div>

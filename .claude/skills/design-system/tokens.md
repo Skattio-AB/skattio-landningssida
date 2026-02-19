@@ -1,3 +1,38 @@
+# Design Tokens — Copy-Paste CSS
+
+This file contains ready-to-use CSS for `src/app/globals.css` and font configuration for `src/app/layout.tsx`.
+
+---
+
+## Font Face Declaration
+
+Add this at the top of `globals.css`, after the imports:
+
+```css
+@font-face {
+  font-family: 'Satoshi';
+  src: url('/fonts/Satoshi-Variable.woff2') format('woff2');
+  font-weight: 300 900;
+  font-display: swap;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Satoshi';
+  src: url('/fonts/Satoshi-VariableItalic.woff2') format('woff2');
+  font-weight: 300 900;
+  font-display: swap;
+  font-style: italic;
+}
+```
+
+---
+
+## Complete globals.css
+
+Replace the entire `src/app/globals.css` with:
+
+```css
 @import "tailwindcss";
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
@@ -129,3 +164,42 @@
     @apply bg-background text-foreground;
   }
 }
+```
+
+---
+
+## layout.tsx Font Configuration
+
+Replace the font imports and configuration in `src/app/layout.tsx`:
+
+```tsx
+import { Inter } from "next/font/google";
+import localFont from "next/font/local";
+
+const satoshi = localFont({
+  src: [
+    {
+      path: "../../public/fonts/Satoshi-Variable.woff2",
+      style: "normal",
+    },
+    {
+      path: "../../public/fonts/Satoshi-VariableItalic.woff2",
+      style: "italic",
+    },
+  ],
+  variable: "--font-display",
+  display: "swap",
+});
+
+const inter = Inter({
+  variable: "--font-body",
+  subsets: ["latin"],
+  display: "swap",
+});
+```
+
+And update the body className:
+
+```tsx
+<body className={`${satoshi.variable} ${inter.variable} font-sans antialiased`}>
+```
