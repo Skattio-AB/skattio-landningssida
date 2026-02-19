@@ -42,9 +42,7 @@ export function Pricing() {
           variants={fadeUp}
           className="mx-auto mt-14 max-w-md"
         >
-          <div className="relative overflow-hidden rounded-2xl border-2 border-accent-500 bg-white p-8 shadow-[0_8px_30px_rgba(10,15,30,0.12),0_2px_8px_rgba(10,15,30,0.06)]">
-            {/* Top accent gradient strip */}
-            <div className="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-accent-500 via-accent-400 to-accent-500" />
+          <div className="relative rounded-2xl border-2 border-accent-500 bg-white p-8 shadow-[0_8px_30px_rgba(10,15,30,0.12),0_2px_8px_rgba(10,15,30,0.06)]">
 
             <Badge className="absolute -top-3 left-1/2 -translate-x-1/2 bg-accent-500 text-white hover:bg-accent-500 shadow-sm">
               Lanseringspris

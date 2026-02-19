@@ -64,7 +64,7 @@ export function FAQ() {
           className="grid gap-10 lg:grid-cols-[1fr,1.5fr] lg:gap-20"
         >
           {/* Left: heading (sticky on desktop) */}
-          <motion.div variants={fadeUp} className="lg:sticky lg:top-28 lg:self-start">
+          <motion.div variants={fadeUp}>
             <h2 className="font-heading text-3xl font-bold tracking-tight text-neutral-950 sm:text-4xl">
               Vanliga frågor
             </h2>
