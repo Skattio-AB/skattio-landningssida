@@ -1,9 +1,7 @@
 import { Header } from "@/components/Header";
-import { Hero } from "@/components/sections/Hero";
-import { HowItWorks } from "@/components/sections/HowItWorks";
-import { Features } from "@/components/sections/Features";
-import { Pricing } from "@/components/sections/Pricing";
-import { FAQ } from "@/components/sections/FAQ";
+import { HeroHome } from "@/components/sections/HeroHome";
+import { Services } from "@/components/sections/Services";
+import { WhySkattio } from "@/components/sections/WhySkattio";
 import { CTA } from "@/components/sections/CTA";
 import { Footer } from "@/components/Footer";
 
@@ -12,11 +10,9 @@ export default function Home() {
     <>
       <Header />
       <main>
-        <Hero />
-        <HowItWorks />
-        <Features />
-        <Pricing />
-        <FAQ />
+        <HeroHome />
+        <Services />
+        <WhySkattio />
         <CTA />
       </main>
       <Footer />
