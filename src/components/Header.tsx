@@ -38,9 +38,17 @@ export function Header() {
           />
         </Link>
 
-        <Button asChild size="sm" className="bg-accent-500 hover:bg-accent-600 text-white">
-          <a href={siteConfig.links.app}>Kom igång</a>
-        </Button>
+        <div className="flex items-center gap-6">
+          <Link
+            href="/bostadsforsaljning"
+            className="hidden sm:block text-sm font-medium text-neutral-700 hover:text-neutral-950 transition-colors"
+          >
+            Bostadsförsäljning
+          </Link>
+          <Button asChild size="sm" className="bg-accent-500 hover:bg-accent-600 text-white">
+            <a href={siteConfig.links.app}>Kom igång</a>
+          </Button>
+        </div>
       </div>
     </motion.header>
   );
