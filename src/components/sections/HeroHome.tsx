@@ -59,9 +59,34 @@ export function HeroHome() {
 
   return (
     <section className="relative overflow-hidden bg-neutral-50 pt-24 pb-20 sm:pt-28 sm:pb-24">
-      {/* Background glows */}
-      <div className="pointer-events-none absolute top-[60%] left-[10%] h-[600px] w-[600px] rounded-full bg-[rgba(232,89,12,0.08)] opacity-40 blur-[120px]" />
-      <div className="pointer-events-none absolute top-[30%] right-[5%] h-[600px] w-[600px] rounded-full bg-[rgba(59,130,246,0.05)] opacity-40 blur-[120px]" />
+      {/* Animated background orbs */}
+      <motion.div
+        animate={{
+          x: [0, 30, -20, 0],
+          y: [0, -40, 20, 0],
+          scale: [1, 1.1, 0.95, 1],
+        }}
+        transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+        className="pointer-events-none absolute top-[60%] left-[10%] h-[600px] w-[600px] rounded-full bg-[rgba(232,89,12,0.08)] opacity-40 blur-[120px]"
+      />
+      <motion.div
+        animate={{
+          x: [0, -25, 15, 0],
+          y: [0, 30, -25, 0],
+          scale: [1, 0.95, 1.08, 1],
+        }}
+        transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
+        className="pointer-events-none absolute top-[30%] right-[5%] h-[600px] w-[600px] rounded-full bg-[rgba(59,130,246,0.05)] opacity-40 blur-[120px]"
+      />
+      <motion.div
+        animate={{
+          x: [0, 20, -30, 0],
+          y: [0, -20, 35, 0],
+          scale: [1, 1.05, 0.97, 1],
+        }}
+        transition={{ duration: 18, repeat: Infinity, ease: "linear" }}
+        className="pointer-events-none absolute top-[10%] left-[50%] h-[400px] w-[400px] -translate-x-1/2 rounded-full bg-[rgba(232,89,12,0.04)] opacity-30 blur-[100px]"
+      />
 
       {/* Text content */}
       <motion.div
@@ -91,7 +116,7 @@ export function HeroHome() {
         {/* Description */}
         <motion.p
           variants={fadeUp}
-          className="mx-auto mt-5 max-w-[520px] text-lg leading-[1.7] text-neutral-400"
+          className="mx-auto mt-5 max-w-[520px] text-lg leading-[1.7] text-neutral-600"
         >
           Skattio guidar dig genom deklarationen steg för steg &mdash; med AI
           som förklarar, beräknar och ser till att allt blir rätt.
@@ -133,7 +158,7 @@ export function HeroHome() {
               : { opacity: 0, y: 40, scale: 0.98 }
           }
           transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1], delay: 0.3 }}
-          className="relative z-[1] overflow-hidden rounded-2xl border border-neutral-200/60 bg-white shadow-[0_0_0_1px_rgba(10,15,30,0.02),0_4px_12px_rgba(10,15,30,0.04),0_20px_60px_rgba(10,15,30,0.08)]"
+          className="relative z-[1] overflow-hidden rounded-2xl border border-neutral-200/60 bg-white ring-1 ring-black/[0.02] shadow-[0_0_0_1px_rgba(10,15,30,0.02),0_4px_12px_rgba(10,15,30,0.04),0_20px_60px_rgba(10,15,30,0.08)]"
         >
           {/* Browser bar */}
           <div className="flex h-11 items-center gap-2 bg-navy-950 px-4">
@@ -254,7 +279,7 @@ export function HeroHome() {
             frameInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }
           }
           transition={{ duration: 0.5, ease: "easeOut", delay: 1.1 }}
-          className="absolute top-5 -right-6 z-[2] rounded-[10px] border border-neutral-200/60 bg-white px-4 py-2 font-heading text-xs font-semibold text-success shadow-[0_4px_16px_rgba(10,15,30,0.08)] max-md:hidden"
+          className="absolute top-5 -right-6 z-[2] rounded-[10px] border border-neutral-200/60 bg-white/90 backdrop-blur-sm px-4 py-2 font-heading text-xs font-semibold text-success shadow-[0_4px_16px_rgba(10,15,30,0.08)] max-md:hidden"
         >
           ✓ K5 klar
         </motion.div>
@@ -265,7 +290,7 @@ export function HeroHome() {
             frameInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }
           }
           transition={{ duration: 0.5, ease: "easeOut", delay: 1.25 }}
-          className="absolute bottom-[60px] -left-5 z-[2] rounded-[10px] border border-transparent bg-navy-950 px-4 py-2 font-heading text-xs font-semibold text-white shadow-[0_4px_16px_rgba(10,15,30,0.08)] max-md:hidden"
+          className="absolute bottom-[60px] -left-5 z-[2] rounded-[10px] border border-transparent bg-navy-950/95 backdrop-blur-sm px-4 py-2 font-heading text-xs font-semibold text-white shadow-[0_4px_16px_rgba(10,15,30,0.08)] max-md:hidden"
         >
           AI-stöd aktiv
         </motion.div>
@@ -276,7 +301,7 @@ export function HeroHome() {
             frameInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }
           }
           transition={{ duration: 0.5, ease: "easeOut", delay: 1.4 }}
-          className="absolute -bottom-3 -right-4 z-[2] rounded-[10px] border border-neutral-200/60 bg-white px-4 py-2.5 text-center shadow-[0_4px_16px_rgba(10,15,30,0.08)] max-md:hidden"
+          className="absolute -bottom-3 -right-4 z-[2] rounded-[10px] border border-neutral-200/60 bg-white/90 backdrop-blur-sm px-4 py-2.5 text-center shadow-[0_4px_16px_rgba(10,15,30,0.08)] max-md:hidden"
         >
           <div className="font-heading text-[9px] font-medium text-neutral-400">
             Du sparar

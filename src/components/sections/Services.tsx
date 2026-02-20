@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { scaleUp, fadeUp, staggerContainer } from "@/lib/animations";
+import { scaleUp, slideUp, staggerContainer } from "@/lib/animations";
 import { Home, KeyRound, Receipt } from "lucide-react";
 
 const services = [
@@ -33,7 +33,7 @@ export function Services() {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-100px" }}
-          variants={fadeUp}
+          variants={slideUp}
           className="text-center"
         >
           <span className="font-mono text-xs font-medium uppercase tracking-wider text-accent-500">
@@ -42,7 +42,7 @@ export function Services() {
           <h2 className="mt-3 font-heading text-[clamp(1.75rem,4vw,2.5rem)] font-bold tracking-[-0.03em] text-neutral-950">
             Deklarationshjälp för alla
           </h2>
-          <p className="mx-auto mt-3 max-w-[520px] text-[17px] leading-[1.7] text-neutral-400">
+          <p className="mx-auto mt-3 max-w-[520px] text-[17px] leading-[1.7] text-neutral-600">
             Skattio hjälper dig med bostadsförsäljning &mdash; och fler
             deklarationstjänster är på väg.
           </p>
@@ -59,7 +59,7 @@ export function Services() {
             <motion.div
               key={service.title}
               variants={scaleUp}
-              className="rounded-xl border border-neutral-200/60 bg-white p-7 transition-all duration-200 hover:border-neutral-300 hover:shadow-card"
+              className="rounded-xl border border-neutral-200/60 bg-white p-7 shadow-[0_1px_2px_rgba(10,15,30,0.04)] transition-all duration-200 hover:border-neutral-300 hover:shadow-[0_8px_30px_rgba(10,15,30,0.08)]"
             >
               <span className="mb-4 inline-flex items-center gap-1.5 rounded-md bg-accent-50 px-2.5 py-1 font-heading text-[11px] font-semibold uppercase tracking-wide text-accent-500">
                 Kommer snart
@@ -72,7 +72,7 @@ export function Services() {
               <h3 className="font-heading text-[17px] font-bold text-neutral-950">
                 {service.title}
               </h3>
-              <p className="mt-2 text-sm leading-relaxed text-neutral-400">
+              <p className="mt-2 text-sm leading-relaxed text-neutral-600">
                 {service.description}
               </p>
             </motion.div>

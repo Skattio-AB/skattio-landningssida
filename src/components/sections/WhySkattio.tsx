@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { scaleUp, fadeUp, staggerContainer } from "@/lib/animations";
+import { scaleUp, slideUp, staggerContainer } from "@/lib/animations";
 import { Sparkles, Shield, Banknote, Zap } from "lucide-react";
 
 const usps = [
@@ -39,7 +39,7 @@ export function WhySkattio() {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-100px" }}
-          variants={fadeUp}
+          variants={slideUp}
           className="text-center"
         >
           <span className="font-mono text-xs font-medium uppercase tracking-wider text-accent-500">
@@ -48,7 +48,7 @@ export function WhySkattio() {
           <h2 className="mt-3 font-heading text-[clamp(1.75rem,4vw,2.5rem)] font-bold tracking-[-0.03em] text-neutral-950">
             Byggt för att förenkla
           </h2>
-          <p className="mx-auto mt-3 max-w-[520px] text-[17px] leading-[1.7] text-neutral-400">
+          <p className="mx-auto mt-3 max-w-[520px] text-[17px] leading-[1.7] text-neutral-600">
             Vi gör deklarationen enklare, snabbare och tryggare &mdash; för
             alla.
           </p>
@@ -65,7 +65,7 @@ export function WhySkattio() {
             <motion.div
               key={usp.title}
               variants={scaleUp}
-              className="rounded-xl border border-neutral-200/60 bg-neutral-50 p-7 transition-colors duration-200 hover:border-neutral-300"
+              className="rounded-xl border border-neutral-200/60 bg-neutral-50 p-7 shadow-[0_1px_2px_rgba(10,15,30,0.04)] transition-all duration-200 hover:border-neutral-300 hover:shadow-[0_8px_30px_rgba(10,15,30,0.08)]"
             >
               <div className="mb-4 flex h-10 w-10 items-center justify-center rounded-[10px] bg-accent-50">
                 <usp.icon className="h-[18px] w-[18px] text-accent-500" />
@@ -73,7 +73,7 @@ export function WhySkattio() {
               <h3 className="font-heading text-base font-bold text-neutral-950">
                 {usp.title}
               </h3>
-              <p className="mt-1.5 text-sm leading-relaxed text-neutral-400">
+              <p className="mt-1.5 text-sm leading-relaxed text-neutral-600">
                 {usp.description}
               </p>
             </motion.div>

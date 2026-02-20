@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { fadeUp, staggerContainer } from "@/lib/animations";
+import { fadeUp, slideUp, staggerContainer } from "@/lib/animations";
 
 const steps = [
   {
@@ -32,7 +32,7 @@ export function HowItWorks() {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-100px" }}
-          variants={fadeUp}
+          variants={slideUp}
           className="text-center"
         >
           <span className="font-mono text-xs font-medium uppercase tracking-wider text-accent-500">
@@ -41,7 +41,7 @@ export function HowItWorks() {
           <h2 className="mt-3 font-heading text-[clamp(1.75rem,4vw,2.5rem)] font-bold tracking-[-0.03em] text-neutral-950">
             Tre steg till färdig deklaration
           </h2>
-          <p className="mx-auto mt-3 max-w-[520px] text-[17px] leading-[1.7] text-neutral-400">
+          <p className="mx-auto mt-3 max-w-[520px] text-[17px] leading-[1.7] text-neutral-600">
             Från start till färdig blankett &mdash; snabbt, enkelt och med stöd
             hela vägen.
           </p>

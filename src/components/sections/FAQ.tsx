@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { fadeUp, staggerContainer } from "@/lib/animations";
+import { fadeUp, slideUp, staggerContainer } from "@/lib/animations";
 import {
   Accordion,
   AccordionContent,
@@ -59,14 +59,14 @@ export function FAQ() {
           className="grid gap-10 lg:grid-cols-[1fr,1.5fr] lg:gap-16"
         >
           {/* Left: heading (sticky on desktop) */}
-          <motion.div variants={fadeUp} className="lg:sticky lg:top-24">
+          <motion.div variants={slideUp}>
             <span className="font-mono text-xs font-medium uppercase tracking-wider text-accent-500">
               FAQ
             </span>
             <h2 className="mt-3 font-heading text-[clamp(1.75rem,4vw,2.5rem)] font-bold tracking-[-0.03em] text-neutral-950">
               Vanliga frågor
             </h2>
-            <p className="mt-3 text-[17px] leading-[1.7] text-neutral-400">
+            <p className="mt-3 text-[17px] leading-[1.7] text-neutral-600">
               Hittar du inte svaret du söker? Kontakta oss så hjälper vi dig.
             </p>
           </motion.div>
@@ -83,7 +83,7 @@ export function FAQ() {
                   <AccordionTrigger className="text-left font-heading text-[15px] font-semibold text-neutral-950 hover:no-underline py-5 hover:text-accent-500 transition-colors">
                     {faq.question}
                   </AccordionTrigger>
-                  <AccordionContent className="text-[15px] text-neutral-400 leading-[1.7] pb-5">
+                  <AccordionContent className="text-[15px] text-neutral-600 leading-[1.7] pb-5">
                     {faq.answer}
                   </AccordionContent>
                 </AccordionItem>
