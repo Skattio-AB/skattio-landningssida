@@ -2,9 +2,6 @@
 
 import { motion } from "framer-motion";
 import { fadeUp } from "@/lib/animations";
-import { Button } from "@/components/ui/button";
-import { siteConfig } from "@/config/site";
-import { ArrowRight } from "lucide-react";
 
 export function CTA() {
   return (
@@ -26,21 +23,9 @@ export function CTA() {
           Redo att deklarera smartare?
         </h2>
         <p className="mt-3 text-[17px] text-navy-300">
-          Kom igång gratis &mdash; betala först när du laddar ner din färdiga
-          blankett.
+          Vi lanserar snart &mdash; skriv upp dig f&ouml;r att bli f&ouml;rst
+          med att testa.
         </p>
-        <div className="mt-9">
-          <Button
-            asChild
-            size="lg"
-            className="bg-accent-500 hover:bg-accent-600 text-white px-7 h-[52px] text-[15px] font-semibold rounded-xl shadow-[0_0_24px_rgba(232,89,12,0.25),0_0_48px_rgba(232,89,12,0.10)] hover:shadow-[0_0_32px_rgba(232,89,12,0.35),0_0_56px_rgba(232,89,12,0.15)] transition-all duration-300"
-          >
-            <a href={siteConfig.links.app}>
-              Kom igång nu
-              <ArrowRight className="ml-2 h-4 w-4" />
-            </a>
-          </Button>
-        </div>
       </motion.div>
     </section>
   );

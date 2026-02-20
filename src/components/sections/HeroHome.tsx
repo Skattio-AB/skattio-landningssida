@@ -4,8 +4,6 @@ import { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { blurIn, fadeUp, scaleUp, staggerContainer } from "@/lib/animations";
-import { siteConfig } from "@/config/site";
-import { ArrowRight } from "lucide-react";
 
 function useInView(ref: React.RefObject<HTMLElement | null>, once = true) {
   const [inView, setInView] = useState(false);
@@ -122,21 +120,11 @@ export function HeroHome() {
           som förklarar, beräknar och ser till att allt blir rätt.
         </motion.p>
 
-        {/* Buttons */}
+        {/* Button */}
         <motion.div
           variants={fadeUp}
-          className="mt-9 flex flex-wrap items-center justify-center gap-3"
+          className="mt-9 flex items-center justify-center"
         >
-          <Button
-            asChild
-            size="lg"
-            className="bg-accent-500 hover:bg-accent-600 text-white px-7 h-[52px] text-[15px] font-semibold rounded-xl shadow-[0_2px_8px_rgba(232,89,12,0.12)] hover:shadow-[0_4px_20px_rgba(232,89,12,0.22)] hover:-translate-y-px transition-all duration-200"
-          >
-            <a href={siteConfig.links.app}>
-              Kom igång gratis
-              <ArrowRight className="ml-2 h-4 w-4" />
-            </a>
-          </Button>
           <Button
             asChild
             variant="outline"

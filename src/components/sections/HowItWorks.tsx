@@ -56,7 +56,7 @@ export function HowItWorks() {
         >
           {steps.map((step) => (
             <motion.div key={step.number} variants={fadeUp}>
-              <div className="font-heading text-5xl font-extrabold leading-none tracking-[-0.04em] text-neutral-200">
+              <div className="font-heading text-5xl font-extrabold leading-none tracking-[-0.04em] text-neutral-300">
                 {step.number}
               </div>
               <h3 className="mt-4 font-heading text-[17px] font-bold text-neutral-950">

@@ -7,7 +7,7 @@ export function Footer() {
     <footer className="border-t border-white/[0.06] bg-navy-950">
       <div className="mx-auto flex max-w-[980px] flex-col items-center gap-5 px-6 py-10 sm:flex-row sm:justify-between">
         {/* Left: logo + copyright */}
-        <div className="flex items-center gap-6 max-sm:flex-col max-sm:gap-2">
+        <div className="flex flex-col gap-2 max-sm:items-center">
           <Link href="/">
             <Image
               src="/images/skattio_fixed2_dark.svg"
