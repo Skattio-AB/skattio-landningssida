@@ -3,6 +3,8 @@ import { Inter } from "next/font/google";
 import localFont from "next/font/local";
 import "./globals.css";
 import { siteConfig } from "@/config/site";
+import { CookieBanner } from "@/components/CookieBanner";
+import { AnalyticsProvider } from "@/components/AnalyticsProvider";
 
 const satoshi = localFont({
   src: [
@@ -71,6 +73,8 @@ export default function RootLayout({
         className={`${satoshi.variable} ${inter.variable} font-sans antialiased`}
       >
         {children}
+        <CookieBanner />
+        <AnalyticsProvider />
       </body>
     </html>
   );

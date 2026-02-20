@@ -12,6 +12,9 @@ const navLinks = [
   { label: "FAQ", href: "#faq" },
 ];
 
+const PILL_DURATION = 0.7;
+const PILL_EASE: [number, number, number, number] = [0.16, 1, 0.3, 1];
+
 export function Header() {
   const [scrolled, setScrolled] = useState(false);
 
@@ -23,19 +26,55 @@ export function Header() {
 
   return (
     <motion.header
-      initial={{ y: -20, opacity: 0 }}
-      animate={{ y: 0, opacity: 1 }}
-      transition={{ duration: 0.4, ease: [0, 0, 0.2, 1] }}
-      className={`sticky top-0 z-50 px-6 pt-4 pb-2 transition-all duration-300 ${
+      initial={{ opacity: 0 }}
+      animate={{
+        opacity: 1,
+        paddingTop: scrolled ? 16 : 0,
+        paddingBottom: scrolled ? 8 : 0,
+        paddingLeft: scrolled ? 24 : 0,
+        paddingRight: scrolled ? 24 : 0,
+      }}
+      transition={{
+        opacity: { duration: 0.4, ease: [0, 0, 0.2, 1] },
+        paddingTop: { duration: PILL_DURATION, ease: PILL_EASE },
+        paddingBottom: { duration: PILL_DURATION, ease: PILL_EASE },
+        paddingLeft: { duration: PILL_DURATION, ease: PILL_EASE },
+        paddingRight: { duration: PILL_DURATION, ease: PILL_EASE },
+      }}
+      className={`sticky top-0 z-50 transition-colors duration-300 ${
         scrolled ? "bg-neutral-50/80 backdrop-blur-xl" : "bg-transparent"
       }`}
     >
-      <div className="mx-auto flex h-12 max-w-[980px] items-center justify-between rounded-full border border-neutral-200/60 bg-white px-5 shadow-[0_1px_3px_rgba(10,15,30,0.04)]">
+      <motion.div
+        animate={{
+          height: scrolled ? 48 : 64,
+          maxWidth: scrolled ? 980 : 2000,
+          borderRadius: scrolled ? 9999 : 0,
+          boxShadow: scrolled
+            ? "0 1px 3px rgba(10,15,30,0.04)"
+            : "0 0px 0px rgba(10,15,30,0)",
+          borderColor: scrolled
+            ? "rgba(229,229,229,0.6)"
+            : "rgba(229,229,229,0)",
+          paddingLeft: scrolled ? 20 : 32,
+          paddingRight: scrolled ? 20 : 32,
+        }}
+        transition={{
+          height: { duration: PILL_DURATION, ease: PILL_EASE },
+          maxWidth: { duration: PILL_DURATION, ease: PILL_EASE },
+          borderRadius: { duration: PILL_DURATION, ease: PILL_EASE },
+          boxShadow: { duration: PILL_DURATION, ease: PILL_EASE },
+          borderColor: { duration: 0.5, ease: PILL_EASE },
+          paddingLeft: { duration: PILL_DURATION, ease: PILL_EASE },
+          paddingRight: { duration: PILL_DURATION, ease: PILL_EASE },
+        }}
+        className="mx-auto flex items-center justify-between border bg-white"
+      >
         <Link href="/">
           <Image
             src="/images/skattio_fixed2_light.svg"
             alt={siteConfig.name}
-            width={100}
+            width={110}
             height={24}
             priority
           />
@@ -46,13 +85,13 @@ export function Header() {
             <a
               key={link.href}
               href={link.href}
-              className="rounded-full px-3.5 py-2 font-heading text-[13px] font-medium text-neutral-500 transition-colors duration-200 hover:bg-neutral-100 hover:text-neutral-950"
+              className="rounded-full px-3.5 py-2 font-heading text-[14px] font-medium text-neutral-500 transition-colors duration-200 hover:bg-neutral-100 hover:text-neutral-950"
             >
               {link.label}
             </a>
           ))}
         </nav>
-      </div>
+      </motion.div>
     </motion.header>
   );
 }
