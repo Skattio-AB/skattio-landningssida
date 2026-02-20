@@ -31,11 +31,6 @@ const faqs = [
       "Ja. All data lagras krypterat hos vår databasvärd med servrar i EU/Sverige. Vi delar aldrig dina uppgifter med tredje part. Du kan när som helst radera ditt konto och all tillhörande data.",
   },
   {
-    question: "Vad kostar det?",
-    answer:
-      "Att starta och fylla i wizarden är gratis. Du betalar 1 499 kr (lanseringspris) först när du laddar ner den färdiga blanketten. Jämfört med 5 000–15 000 kr hos en skatteexpert.",
-  },
-  {
     question: "Kan jag lita på beräkningarna?",
     answer:
       "Våra beräkningar följer Skatteverkets regler och genererar blanketter i rätt format (PDF och SRU). Vi rekommenderar alltid att du granskar blanketten innan du skickar in den.",
@@ -54,21 +49,24 @@ const faqs = [
 
 export function FAQ() {
   return (
-    <section id="faq" className="bg-neutral-50 py-20 sm:py-28">
-      <div className="mx-auto max-w-6xl px-6">
+    <section id="faq" className="bg-neutral-50 py-24 sm:py-28">
+      <div className="mx-auto max-w-[980px] px-6">
         <motion.div
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-100px" }}
           variants={staggerContainer}
-          className="grid gap-10 lg:grid-cols-[1fr,1.5fr] lg:gap-20"
+          className="grid gap-10 lg:grid-cols-[1fr,1.5fr] lg:gap-16"
         >
           {/* Left: heading (sticky on desktop) */}
-          <motion.div variants={fadeUp}>
-            <h2 className="font-heading text-3xl font-bold tracking-tight text-neutral-950 sm:text-4xl">
+          <motion.div variants={fadeUp} className="lg:sticky lg:top-24">
+            <span className="font-mono text-xs font-medium uppercase tracking-wider text-accent-500">
+              FAQ
+            </span>
+            <h2 className="mt-3 font-heading text-[clamp(1.75rem,4vw,2.5rem)] font-bold tracking-[-0.03em] text-neutral-950">
               Vanliga frågor
             </h2>
-            <p className="mt-4 text-neutral-600 leading-relaxed">
+            <p className="mt-3 text-[17px] leading-[1.7] text-neutral-400">
               Hittar du inte svaret du söker? Kontakta oss så hjälper vi dig.
             </p>
           </motion.div>
@@ -82,10 +80,10 @@ export function FAQ() {
                   value={`faq-${i}`}
                   className={`border-b border-neutral-200 px-0 ${i === 0 ? "border-t" : ""}`}
                 >
-                  <AccordionTrigger className="text-left font-heading text-base font-semibold text-neutral-950 hover:no-underline py-5 hover:text-neutral-700 transition-colors">
+                  <AccordionTrigger className="text-left font-heading text-[15px] font-semibold text-neutral-950 hover:no-underline py-5 hover:text-accent-500 transition-colors">
                     {faq.question}
                   </AccordionTrigger>
-                  <AccordionContent className="text-sm text-neutral-600 leading-relaxed pb-5">
+                  <AccordionContent className="text-[15px] text-neutral-400 leading-[1.7] pb-5">
                     {faq.answer}
                   </AccordionContent>
                 </AccordionItem>

@@ -8,10 +8,11 @@ import { ArrowRight } from "lucide-react";
 
 export function CTA() {
   return (
-    <section className="relative overflow-hidden bg-navy-950 py-16 sm:py-24">
-      {/* Atmospheric radial glow */}
-      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_60%_50%_at_50%_110%,_rgba(58,79,135,0.25)_0%,_transparent_70%)]" />
-      {/* Subtle top-edge glow for depth */}
+    <section className="relative overflow-hidden bg-navy-950 py-24 sm:py-28">
+      {/* Atmospheric radial glows */}
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_50%_40%_at_30%_50%,_rgba(232,89,12,0.10)_0%,_transparent_60%)]" />
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_30%_30%_at_70%_50%,_rgba(59,130,246,0.05)_0%,_transparent_50%)]" />
+      {/* Top-edge glow for depth */}
       <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-navy-700 to-transparent" />
 
       <motion.div
@@ -19,20 +20,20 @@ export function CTA() {
         whileInView="visible"
         viewport={{ once: true, margin: "-100px" }}
         variants={fadeUp}
-        className="relative mx-auto max-w-3xl px-6 text-center"
+        className="relative mx-auto max-w-[560px] px-6 text-center"
       >
-        <h2 className="font-heading text-3xl font-bold tracking-tight text-white sm:text-4xl">
-          Redo att deklarera?
+        <h2 className="font-heading text-[clamp(1.75rem,4vw,2.5rem)] font-bold tracking-[-0.03em] text-white">
+          Redo att deklarera smartare?
         </h2>
-        <p className="mx-auto mt-4 max-w-xl text-lg text-navy-300 leading-relaxed">
-          Kom igång gratis och betala först när du laddar ner din färdiga
+        <p className="mt-3 text-[17px] text-navy-300">
+          Kom igång gratis &mdash; betala först när du laddar ner din färdiga
           blankett.
         </p>
-        <div className="mt-10">
+        <div className="mt-9">
           <Button
             asChild
             size="lg"
-            className="bg-accent-500 hover:bg-accent-600 text-white px-8 h-12 text-base shadow-[0_0_20px_rgba(232,89,12,0.25),0_0_40px_rgba(232,89,12,0.10)] hover:shadow-[0_0_25px_rgba(232,89,12,0.35),0_0_50px_rgba(232,89,12,0.15)] transition-all duration-300"
+            className="bg-accent-500 hover:bg-accent-600 text-white px-7 h-[52px] text-[15px] font-semibold rounded-xl shadow-[0_0_24px_rgba(232,89,12,0.25),0_0_48px_rgba(232,89,12,0.10)] hover:shadow-[0_0_32px_rgba(232,89,12,0.35),0_0_56px_rgba(232,89,12,0.15)] transition-all duration-300"
           >
             <a href={siteConfig.links.app}>
               Kom igång nu

@@ -1,7 +1,9 @@
 import { Header } from "@/components/Header";
 import { HeroHome } from "@/components/sections/HeroHome";
+import { HowItWorks } from "@/components/sections/HowItWorks";
 import { Services } from "@/components/sections/Services";
 import { WhySkattio } from "@/components/sections/WhySkattio";
+import { FAQ } from "@/components/sections/FAQ";
 import { CTA } from "@/components/sections/CTA";
 import { Footer } from "@/components/Footer";
 
@@ -11,8 +13,10 @@ export default function Home() {
       <Header />
       <main>
         <HeroHome />
+        <HowItWorks />
         <Services />
         <WhySkattio />
+        <FAQ />
         <CTA />
       </main>
       <Footer />

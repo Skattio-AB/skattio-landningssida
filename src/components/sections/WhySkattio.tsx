@@ -25,7 +25,7 @@ const usps = [
   },
   {
     icon: Zap,
-    title: "Snabb och smidig process",
+    title: "Snabb och smidig",
     description:
       "Fyll i din deklaration på minuter istället för timmar. Allt är guidad steg för steg.",
   },
@@ -33,8 +33,8 @@ const usps = [
 
 export function WhySkattio() {
   return (
-    <section className="bg-navy-50 py-20 sm:py-28">
-      <div className="mx-auto max-w-6xl px-6">
+    <section className="bg-white py-24 sm:py-28">
+      <div className="mx-auto max-w-[980px] px-6">
         <motion.div
           initial="hidden"
           whileInView="visible"
@@ -42,11 +42,15 @@ export function WhySkattio() {
           variants={fadeUp}
           className="text-center"
         >
-          <h2 className="font-heading text-3xl font-bold tracking-tight text-neutral-950 sm:text-4xl">
-            Varför Skattio?
+          <span className="font-mono text-xs font-medium uppercase tracking-wider text-accent-500">
+            Varför Skattio
+          </span>
+          <h2 className="mt-3 font-heading text-[clamp(1.75rem,4vw,2.5rem)] font-bold tracking-[-0.03em] text-neutral-950">
+            Byggt för att förenkla
           </h2>
-          <p className="mx-auto mt-4 max-w-xl text-neutral-600 leading-relaxed">
-            Vi gör deklarationen enklare, snabbare och tryggare — för alla.
+          <p className="mx-auto mt-3 max-w-[520px] text-[17px] leading-[1.7] text-neutral-400">
+            Vi gör deklarationen enklare, snabbare och tryggare &mdash; för
+            alla.
           </p>
         </motion.div>
 
@@ -55,21 +59,21 @@ export function WhySkattio() {
           whileInView="visible"
           viewport={{ once: true, margin: "-100px" }}
           variants={staggerContainer}
-          className="mt-16 grid gap-6 sm:grid-cols-2 lg:grid-cols-4"
+          className="mx-auto mt-14 grid max-w-3xl gap-5 sm:grid-cols-2"
         >
           {usps.map((usp) => (
             <motion.div
               key={usp.title}
               variants={scaleUp}
-              className="rounded-xl border border-neutral-200/80 bg-white p-6 shadow-[0_1px_3px_rgba(10,15,30,0.04),0_1px_2px_rgba(10,15,30,0.02)]"
+              className="rounded-xl border border-neutral-200/60 bg-neutral-50 p-7 transition-colors duration-200 hover:border-neutral-300"
             >
-              <div className="mb-4 flex h-11 w-11 items-center justify-center rounded-lg bg-navy-50 text-navy-700">
-                <usp.icon className="h-5 w-5" />
+              <div className="mb-4 flex h-10 w-10 items-center justify-center rounded-[10px] bg-accent-50">
+                <usp.icon className="h-[18px] w-[18px] text-accent-500" />
               </div>
-              <h3 className="font-heading text-base font-semibold text-neutral-950">
+              <h3 className="font-heading text-base font-bold text-neutral-950">
                 {usp.title}
               </h3>
-              <p className="mt-2 text-sm text-neutral-600 leading-relaxed">
+              <p className="mt-1.5 text-sm leading-relaxed text-neutral-400">
                 {usp.description}
               </p>
             </motion.div>

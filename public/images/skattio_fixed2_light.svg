@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 48" width="200" height="48">
+  <defs>
+    <linearGradient id="gold" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#F5C842"/>
+      <stop offset="100%" stop-color="#D4960A"/>
+    </linearGradient>
+
+    <!-- Mask that shows only the upper-left triangle region -->
+    <mask id="goldMask">
+      <rect width="200" height="48" fill="black"/>
+      <!-- White = visible. Show top-left portion above diagonal -->
+      <polygon points="0,0 36,0 36,14 14,36 0,36" fill="white"/>
+    </mask>
+
+    <!-- Mask that shows only the lower-right triangle region -->
+    <mask id="darkMask">
+      <rect width="200" height="48" fill="black"/>
+      <!-- Show bottom-right portion below diagonal -->
+      <polygon points="14,48 48,48 48,12 36,12 36,14 14,36" fill="white"/>
+    </mask>
+  </defs>
+
+  <!-- Dark square rendered with correct rx, masked to lower-right -->
+  <rect x="12" y="12" width="36" height="36" rx="5" fill="#1C1C1C" mask="url(#darkMask)"/>
+
+  <!-- Gold square rendered with correct rx, masked to upper-left -->
+  <rect x="0" y="0" width="36" height="36" rx="5" fill="url(#gold)" mask="url(#goldMask)"/>
+
+  <!-- Seam line -->
+  <line x1="36" y1="14" x2="14" y2="36" stroke="#E8B800" stroke-width="0.6" opacity="0.4"/>
+
+  <!-- Wordmark -->
+  <text
+    x="58"
+    y="34"
+    font-family="'Syne', 'Helvetica Neue', sans-serif"
+    font-weight="800"
+    font-size="28"
+    letter-spacing="-0.5"
+    fill="#111111">Skattio</text>
+</svg>
