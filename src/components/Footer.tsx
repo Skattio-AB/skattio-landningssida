@@ -1,3 +1,4 @@
+import Link from "next/link";
 import Image from "next/image";
 import { siteConfig } from "@/config/site";
 
@@ -38,18 +39,18 @@ export function Footer() {
 
           {/* Policy links */}
           <nav className="flex flex-wrap justify-center gap-x-5 gap-y-1 text-xs text-navy-500">
-            <a href="#" className="transition-colors duration-200 hover:text-navy-300">
+            <Link href="/anvandarvillkor" className="transition-colors duration-200 hover:text-navy-300">
               Användarvillkor
-            </a>
-            <a href="#" className="transition-colors duration-200 hover:text-navy-300">
+            </Link>
+            <Link href="/integritetspolicy" className="transition-colors duration-200 hover:text-navy-300">
               Integritetspolicy
-            </a>
-            <a href="#" className="transition-colors duration-200 hover:text-navy-300">
+            </Link>
+            <Link href="/cookies" className="transition-colors duration-200 hover:text-navy-300">
               Cookies
-            </a>
-            <a href="#" className="transition-colors duration-200 hover:text-navy-300">
+            </Link>
+            <Link href="/gdpr" className="transition-colors duration-200 hover:text-navy-300">
               GDPR
-            </a>
+            </Link>
           </nav>
         </div>
       </div>

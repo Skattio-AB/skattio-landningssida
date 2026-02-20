@@ -32,7 +32,7 @@ export function Hero() {
 
         <motion.h1
           variants={blurIn}
-          className="font-heading text-4xl font-extrabold leading-[1.1] tracking-tight text-neutral-950 sm:text-5xl lg:text-6xl"
+          className="font-heading text-4xl font-bold leading-[1.1] tracking-tight text-neutral-950 sm:text-5xl lg:text-6xl"
         >
           Skattehjälp som{" "}
           <span className="bg-gradient-to-r from-accent-500 to-accent-400 bg-clip-text text-transparent">
