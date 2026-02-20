@@ -1,0 +1,809 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Skattio — Premium Fintech</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --font-heading: 'Sora', sans-serif;
+    --font-body: 'Inter', sans-serif;
+    --font-mono: 'JetBrains Mono', monospace;
+    --bg: #0A0F1E;
+    --bg-lighter: #0F1629;
+    --bg-card: rgba(255,255,255,0.04);
+    --bg-card-hover: rgba(255,255,255,0.07);
+    --border: rgba(255,255,255,0.08);
+    --border-hover: rgba(232,89,12,0.4);
+    --text: #FFFFFF;
+    --text-secondary: rgba(255,255,255,0.6);
+    --text-muted: rgba(255,255,255,0.4);
+    --orange: #E8590C;
+    --orange-glow: rgba(232,89,12,0.15);
+    --green: #22C55E;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: var(--font-body);
+    color: var(--text-secondary);
+    background: var(--bg);
+    line-height: 1.7;
+    font-size: 16px;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+
+  h1, h2, h3 {
+    font-family: var(--font-heading);
+    color: var(--text);
+  }
+
+  /* Animations */
+  .reveal {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+  .delay-1 { transition-delay: 0.1s; }
+  .delay-2 { transition-delay: 0.2s; }
+  .delay-3 { transition-delay: 0.3s; }
+
+  .container { max-width: 1120px; margin: 0 auto; padding: 0 24px; }
+
+  /* ── Gradient separator ── */
+  .gradient-line {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1) 30%, rgba(232,89,12,0.2) 50%, rgba(255,255,255,0.1) 70%, transparent);
+    max-width: 1120px;
+    margin: 0 auto;
+  }
+
+  /* ── Header ── */
+  header {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 50;
+    background: rgba(10,15,30,0.8);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.3s;
+  }
+  header.scrolled { border-bottom-color: var(--border); }
+  .header-inner {
+    max-width: 1120px;
+    margin: 0 auto;
+    padding: 0 24px;
+    height: 64px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .logo {
+    font-family: var(--font-heading);
+    font-size: 1.375rem;
+    font-weight: 700;
+    color: var(--text);
+    text-decoration: none;
+    letter-spacing: -0.02em;
+  }
+  .logo span { color: var(--orange); }
+  .header-nav {
+    display: flex;
+    align-items: center;
+    gap: 28px;
+  }
+  .header-nav a {
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+    text-decoration: none;
+    position: relative;
+    transition: color 0.2s;
+  }
+  .header-nav a::after {
+    content: '';
+    position: absolute;
+    bottom: -4px; left: 0;
+    width: 0; height: 1.5px;
+    background: var(--orange);
+    transition: width 0.3s ease;
+  }
+  .header-nav a:hover { color: var(--text); }
+  .header-nav a:hover::after { width: 100%; }
+
+  .btn-glow {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--orange);
+    color: var(--text);
+    font-family: var(--font-heading);
+    font-size: 0.9375rem;
+    font-weight: 600;
+    padding: 12px 28px;
+    border-radius: 10px;
+    text-decoration: none;
+    transition: box-shadow 0.3s, transform 0.2s;
+    box-shadow: 0 0 20px var(--orange-glow), 0 0 40px rgba(232,89,12,0.08);
+  }
+  .btn-glow:hover {
+    box-shadow: 0 0 30px rgba(232,89,12,0.3), 0 0 60px rgba(232,89,12,0.12);
+    transform: translateY(-1px);
+  }
+  .btn-glow-sm { font-size: 0.8125rem; padding: 8px 20px; }
+  .btn-ghost-dark {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: transparent;
+    color: var(--text-secondary);
+    font-family: var(--font-heading);
+    font-size: 0.9375rem;
+    font-weight: 500;
+    padding: 12px 28px;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    text-decoration: none;
+    transition: border-color 0.2s, color 0.2s;
+  }
+  .btn-ghost-dark:hover { border-color: var(--text-secondary); color: var(--text); }
+
+  /* ── Glass card mixin ── */
+  .glass {
+    background: var(--bg-card);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    transition: border-color 0.3s, box-shadow 0.3s, transform 0.3s;
+  }
+  .glass:hover {
+    border-color: var(--border-hover);
+    box-shadow: 0 0 30px var(--orange-glow);
+    transform: translateY(-4px);
+  }
+
+  /* ── Hero ── */
+  .hero {
+    padding: 160px 24px 120px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  /* Animated gradient orb */
+  .hero-orb {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 600px;
+    height: 600px;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(232,89,12,0.15) 0%, rgba(59,130,246,0.08) 40%, transparent 70%);
+    animation: orbPulse 8s ease-in-out infinite;
+    pointer-events: none;
+  }
+  @keyframes orbPulse {
+    0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 0.6; }
+    50% { transform: translate(-50%, -50%) scale(1.15); opacity: 1; }
+  }
+  .hero-content { position: relative; z-index: 1; max-width: 700px; margin: 0 auto; }
+  .hero h1 {
+    font-size: clamp(2.5rem, 6vw, 4rem);
+    font-weight: 700;
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+  }
+  .hero h1 .gradient-text {
+    background: linear-gradient(135deg, var(--orange), #F59E0B);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .hero p {
+    margin-top: 24px;
+    font-size: 1.125rem;
+    max-width: 540px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .hero-actions {
+    margin-top: 40px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 16px;
+  }
+
+  /* ── Section shared ── */
+  .section-padding { padding: 100px 24px; }
+  .section-header {
+    text-align: center;
+    margin-bottom: 64px;
+  }
+  .section-header h2 {
+    font-size: clamp(1.75rem, 4vw, 2.5rem);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+  }
+  .section-header p {
+    margin-top: 12px;
+    color: var(--text-secondary);
+    max-width: 480px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  /* ── How it works ── */
+  .steps-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    max-width: 960px;
+    margin: 0 auto;
+  }
+  .step-card { padding: 32px 24px; text-align: center; }
+  .step-num {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--orange);
+    margin-bottom: 16px;
+    letter-spacing: 0.1em;
+  }
+  .step-card h3 {
+    font-size: 1.125rem;
+    font-weight: 600;
+    margin-bottom: 8px;
+  }
+  .step-card p { font-size: 0.9375rem; }
+
+  /* ── Services ── */
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    max-width: 960px;
+    margin: 0 auto;
+  }
+  .service-card { padding: 28px 24px; }
+  .service-tag {
+    display: inline-block;
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    padding: 4px 12px;
+    border-radius: 6px;
+    margin-bottom: 16px;
+  }
+  .service-tag.available {
+    background: rgba(232,89,12,0.15);
+    color: var(--orange);
+    border: 1px solid rgba(232,89,12,0.3);
+  }
+  .service-tag.coming {
+    background: rgba(255,255,255,0.05);
+    color: var(--text-muted);
+    border: 1px solid var(--border);
+  }
+  .service-card h3 { font-size: 1.125rem; font-weight: 600; margin-bottom: 8px; }
+  .service-card p { font-size: 0.875rem; }
+
+  /* ── Why Skattio ── */
+  .usp-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+    max-width: 720px;
+    margin: 0 auto;
+  }
+  .usp-card { padding: 28px 24px; }
+  .usp-icon {
+    width: 40px; height: 40px;
+    border-radius: 10px;
+    background: rgba(232,89,12,0.1);
+    border: 1px solid rgba(232,89,12,0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.125rem;
+    margin-bottom: 16px;
+  }
+  .usp-card h3 { font-size: 1rem; font-weight: 600; margin-bottom: 6px; }
+  .usp-card p { font-size: 0.875rem; }
+
+  /* ── Pricing ── */
+  .price-card-wrap {
+    max-width: 440px;
+    margin: 0 auto;
+  }
+  .price-card {
+    padding: 40px 32px;
+    position: relative;
+    overflow: hidden;
+  }
+  .price-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--orange), transparent);
+  }
+  .price-badge {
+    display: inline-block;
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    padding: 4px 14px;
+    border-radius: 6px;
+    background: rgba(232,89,12,0.15);
+    color: var(--orange);
+    border: 1px solid rgba(232,89,12,0.3);
+  }
+  .price-type {
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+    margin-top: 16px;
+  }
+  .price-amount {
+    font-family: var(--font-mono);
+    font-size: 3.5rem;
+    font-weight: 700;
+    color: var(--text);
+    line-height: 1;
+    margin-top: 12px;
+  }
+  .price-amount span { font-size: 1rem; color: var(--text-muted); font-weight: 500; }
+  .price-old {
+    margin-top: 6px;
+    font-family: var(--font-mono);
+    font-size: 0.8125rem;
+    color: var(--text-muted);
+    text-decoration: line-through;
+  }
+  .price-compare {
+    margin-top: 12px;
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+  }
+  .price-divider {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--border) 30%, var(--border) 70%, transparent);
+    margin: 28px 0;
+  }
+  .price-features {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .price-features li {
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .price-check {
+    width: 18px; height: 18px;
+    border-radius: 50%;
+    background: rgba(34,197,94,0.15);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+  .price-check svg { width: 10px; height: 10px; stroke: var(--green); fill: none; stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; }
+  .price-cta { margin-top: 28px; }
+  .btn-glow.full { width: 100%; justify-content: center; }
+  .price-note { margin-top: 14px; font-size: 0.8125rem; color: var(--text-muted); text-align: center; }
+
+  /* ── FAQ ── */
+  .faq-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.5fr;
+    gap: 64px;
+    max-width: 900px;
+    margin: 0 auto;
+    align-items: start;
+  }
+  .faq-left h2 { font-size: clamp(1.75rem, 4vw, 2.5rem); font-weight: 700; }
+  .faq-left p { margin-top: 12px; }
+  .faq-item { border-bottom: 1px solid var(--border); }
+  .faq-item:first-child { border-top: 1px solid var(--border); }
+  .faq-question {
+    width: 100%;
+    background: none;
+    border: none;
+    padding: 20px 0;
+    font-family: var(--font-heading);
+    font-size: 0.9375rem;
+    font-weight: 600;
+    color: var(--text);
+    text-align: left;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+    transition: color 0.2s;
+  }
+  .faq-question:hover { color: var(--orange); }
+  .faq-icon {
+    font-size: 1.25rem;
+    color: var(--orange);
+    transition: transform 0.3s ease;
+    flex-shrink: 0;
+  }
+  .faq-item.open .faq-icon { transform: rotate(45deg); }
+  .faq-answer {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease;
+  }
+  .faq-answer-inner {
+    padding-bottom: 20px;
+    font-size: 0.875rem;
+    line-height: 1.7;
+  }
+
+  /* ── CTA ── */
+  .cta-section {
+    padding: 100px 24px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .cta-orb {
+    position: absolute;
+    top: 50%; left: 50%;
+    width: 500px; height: 500px;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(232,89,12,0.12) 0%, transparent 60%);
+    pointer-events: none;
+  }
+  .cta-section h2 {
+    font-size: clamp(1.75rem, 4vw, 2.5rem);
+    font-weight: 700;
+    position: relative;
+  }
+  .cta-section p {
+    margin-top: 12px;
+    font-size: 1.0625rem;
+    position: relative;
+  }
+  .cta-section .btn-glow { margin-top: 36px; position: relative; }
+
+  /* ── Footer ── */
+  footer {
+    padding: 48px 24px;
+    border-top: 1px solid var(--border);
+  }
+  .footer-inner {
+    max-width: 1120px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
+    text-align: center;
+  }
+  .footer-logo {
+    font-family: var(--font-heading);
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--text);
+    text-decoration: none;
+  }
+  .footer-logo span { color: var(--orange); }
+  .footer-links {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 24px;
+  }
+  .footer-links a {
+    font-size: 0.8125rem;
+    color: var(--text-muted);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .footer-links a:hover { color: var(--text); }
+  .footer-copy { font-size: 0.8125rem; color: var(--text-muted); }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .header-nav a:not(:last-child) { display: none; }
+    .steps-grid, .services-grid { grid-template-columns: 1fr; max-width: 400px; }
+    .usp-grid { grid-template-columns: 1fr; max-width: 400px; }
+    .faq-grid { grid-template-columns: 1fr; gap: 40px; }
+    .hero-orb { width: 350px; height: 350px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- Header -->
+<header id="site-header">
+  <div class="header-inner">
+    <a href="#" class="logo">Skatti<span>o</span></a>
+    <nav class="header-nav">
+      <a href="#hur-det-fungerar">Hur det fungerar</a>
+      <a href="#priser">Priser</a>
+      <a href="#faq">FAQ</a>
+      <a href="https://app.skattio.se" class="btn-glow btn-glow-sm">Kom igång</a>
+    </nav>
+  </div>
+</header>
+
+<!-- Hero -->
+<section class="hero">
+  <div class="hero-orb"></div>
+  <div class="hero-content reveal">
+    <h1>Din skattehjälp — <span class="gradient-text">enkel, smart och trygg</span></h1>
+    <p>Skattio guidar dig genom deklarationen steg för steg — med AI-stöd som förklarar, beräknar och ser till att allt blir rätt.</p>
+    <div class="hero-actions">
+      <a href="https://app.skattio.se" class="btn-glow">Kom igång gratis &rarr;</a>
+      <a href="#tjanster" class="btn-ghost-dark">Utforska våra tjänster</a>
+    </div>
+  </div>
+</section>
+
+<div class="gradient-line"></div>
+
+<!-- How it works -->
+<section class="section-padding" id="hur-det-fungerar">
+  <div class="container">
+    <div class="section-header reveal">
+      <h2>Så funkar det</h2>
+      <p>Tre enkla steg från start till färdig deklaration.</p>
+    </div>
+    <div class="steps-grid">
+      <div class="step-card glass reveal delay-1">
+        <p class="step-num">STEP 01</p>
+        <h3>Svara på frågor</h3>
+        <p>Vår guidade wizard tar dig steg för steg genom alla uppgifter som behövs. Inget krångel, bara enkla frågor.</p>
+      </div>
+      <div class="step-card glass reveal delay-2">
+        <p class="step-num">STEP 02</p>
+        <h3>Granska med AI-stöd</h3>
+        <p>Vårt AI-stöd hjälper dig att dubbelkolla allt. Ställ frågor direkt i wizarden om du undrar något.</p>
+      </div>
+      <div class="step-card glass reveal delay-3">
+        <p class="step-num">STEP 03</p>
+        <h3>Ladda ner &amp; skicka in</h3>
+        <p>Ladda ner färdig blankett som PDF eller SRU-fil och importera direkt i Skatteverkets e-tjänst.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="gradient-line"></div>
+
+<!-- Services -->
+<section class="section-padding" id="tjanster">
+  <div class="container">
+    <div class="section-header reveal">
+      <h2>Våra tjänster</h2>
+      <p>Skattio hjälper dig med bostadsförsäljning idag — och fler deklarationstjänster är på väg.</p>
+    </div>
+    <div class="services-grid">
+      <div class="service-card glass reveal delay-1">
+        <span class="service-tag available">Tillgänglig nu</span>
+        <h3>Bostadsförsäljning (K5/K6)</h3>
+        <p>Deklarera vinst eller förlust vid försäljning av villa, bostadsrätt eller fritidshus. Steg-för-steg med AI-stöd.</p>
+      </div>
+      <div class="service-card glass reveal delay-2">
+        <span class="service-tag coming">Kommer snart</span>
+        <h3>Uthyrning</h3>
+        <p>Deklarera inkomst från uthyrning av bostad enkelt och korrekt. Vi guidar dig genom reglerna.</p>
+      </div>
+      <div class="service-card glass reveal delay-3">
+        <span class="service-tag coming">Kommer snart</span>
+        <h3>Fler avdrag</h3>
+        <p>ROT, RUT, ränteavdrag och mer. Vi bygger stöd för fler avdrag och deklarationshjälp.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="gradient-line"></div>
+
+<!-- Why Skattio -->
+<section class="section-padding">
+  <div class="container">
+    <div class="section-header reveal">
+      <h2>Varför Skattio?</h2>
+      <p>Vi gör deklarationen enklare, snabbare och tryggare — för alla.</p>
+    </div>
+    <div class="usp-grid">
+      <div class="usp-card glass reveal delay-1">
+        <div class="usp-icon">&#10024;</div>
+        <h3>AI-stöd som guidar dig</h3>
+        <p>Osäker på en fråga? Vårt AI-stöd förklarar och hjälper dig direkt i steget du arbetar med.</p>
+      </div>
+      <div class="usp-card glass reveal delay-2">
+        <div class="usp-icon">&#128737;</div>
+        <h3>Säker datahantering</h3>
+        <p>Din data lagras krypterat och delas aldrig med tredje part. Servrar i Sverige.</p>
+      </div>
+      <div class="usp-card glass reveal delay-1">
+        <div class="usp-icon">&#128176;</div>
+        <h3>En bråkdel av priset</h3>
+        <p>Enklare än en skatteexpert — till en bråkdel av kostnaden. Betala först när du är klar.</p>
+      </div>
+      <div class="usp-card glass reveal delay-2">
+        <div class="usp-icon">&#9889;</div>
+        <h3>Snabb och smidig process</h3>
+        <p>Fyll i din deklaration på minuter istället för timmar. Allt är guidad steg för steg.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="gradient-line"></div>
+
+<!-- Pricing -->
+<section class="section-padding" id="priser">
+  <div class="container">
+    <div class="section-header reveal">
+      <h2>Enkel prissättning</h2>
+      <p>En bråkdel av vad en skatteexpert kostar.</p>
+    </div>
+    <div class="price-card-wrap reveal">
+      <div class="price-card glass" style="text-align:center">
+        <span class="price-badge">Lanseringspris</span>
+        <p class="price-type">Bostadsförsäljning (K5/K6)</p>
+        <div class="price-amount">1 499 <span>kr</span></div>
+        <p class="price-old">2 499 kr ordinarie pris</p>
+        <p class="price-compare">Jämfört med 5 000–15 000 kr hos skatteexpert</p>
+        <div class="price-divider"></div>
+        <ul class="price-features" style="text-align:left">
+          <li><span class="price-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>Guidad steg-för-steg wizard</li>
+          <li><span class="price-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>AI-stöd för frågor</li>
+          <li><span class="price-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>Automatisk beräkning av vinst/förlust</li>
+          <li><span class="price-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>Uppskovsberäkning</li>
+          <li><span class="price-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>Färdig K5 eller K6-blankett (PDF)</li>
+          <li><span class="price-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>SRU-fil för import i Skatteverket</li>
+        </ul>
+        <div class="price-cta">
+          <a href="https://app.skattio.se" class="btn-glow full">Kom igång &rarr;</a>
+          <p class="price-note">Du betalar först när du laddar ner blanketten.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="gradient-line"></div>
+
+<!-- FAQ -->
+<section class="section-padding" id="faq">
+  <div class="container">
+    <div class="faq-grid">
+      <div class="faq-left reveal">
+        <h2>Vanliga frågor</h2>
+        <p>Hittar du inte svaret du söker? Kontakta oss så hjälper vi dig.</p>
+      </div>
+      <div class="reveal">
+        <div class="faq-item">
+          <button class="faq-question" aria-expanded="false"><span>Vad är Skattio?</span><span class="faq-icon">+</span></button>
+          <div class="faq-answer"><div class="faq-answer-inner">Skattio är en digital tjänst som hjälper dig deklarera enklare. Vi guidar dig steg för steg med en wizard och AI-stöd, och genererar färdiga blanketter (K5/K6) som du kan skicka in till Skatteverket.</div></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question" aria-expanded="false"><span>Vilka deklarationer stödjer ni?</span><span class="faq-icon">+</span></button>
+          <div class="faq-answer"><div class="faq-answer-inner">Just nu stödjer vi bostadsförsäljning — både villa/fastighet (K5) och bostadsrätt (K6), inklusive uppskov. Vi bygger stöd för fler avdrag och deklarationstjänster.</div></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question" aria-expanded="false"><span>Hur fungerar AI-stödet?</span><span class="faq-icon">+</span></button>
+          <div class="faq-answer"><div class="faq-answer-inner">Vårt AI-stöd finns tillgängligt direkt i wizarden. Du kan ställa frågor om just det steg du arbetar med, och få förklaringar anpassade efter din situation. AI:t har kunskap om svenska skatteregler.</div></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question" aria-expanded="false"><span>Är min data säker?</span><span class="faq-icon">+</span></button>
+          <div class="faq-answer"><div class="faq-answer-inner">Ja. All data lagras krypterat hos vår databasvärd med servrar i EU/Sverige. Vi delar aldrig dina uppgifter med tredje part. Du kan när som helst radera ditt konto och all tillhörande data.</div></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question" aria-expanded="false"><span>Vad kostar det?</span><span class="faq-icon">+</span></button>
+          <div class="faq-answer"><div class="faq-answer-inner">Att starta och fylla i wizarden är gratis. Du betalar 1 499 kr (lanseringspris) först när du laddar ner den färdiga blanketten. Jämfört med 5 000–15 000 kr hos en skatteexpert.</div></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question" aria-expanded="false"><span>Kan jag lita på beräkningarna?</span><span class="faq-icon">+</span></button>
+          <div class="faq-answer"><div class="faq-answer-inner">Våra beräkningar följer Skatteverkets regler och genererar blanketter i rätt format (PDF och SRU). Vi rekommenderar alltid att du granskar blanketten innan du skickar in den.</div></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question" aria-expanded="false"><span>Vad är en SRU-fil?</span><span class="faq-icon">+</span></button>
+          <div class="faq-answer"><div class="faq-answer-inner">En SRU-fil är Skatteverkets standardformat för digital inlämning. Du kan importera filen direkt i Skatteverkets e-tjänst, så slipper du fylla i allt manuellt.</div></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question" aria-expanded="false"><span>Hur lång tid tar det?</span><span class="faq-icon">+</span></button>
+          <div class="faq-answer"><div class="faq-answer-inner">De flesta är klara inom 15–30 minuter. Har du uppgifterna till hands (köpe- och försäljningspris, mäklararvode etc.) går det ännu snabbare.</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="gradient-line"></div>
+
+<!-- CTA -->
+<section class="cta-section">
+  <div class="cta-orb"></div>
+  <div class="container reveal">
+    <h2>Redo att deklarera?</h2>
+    <p>Kom igång gratis och betala först när du laddar ner din färdiga blankett.</p>
+    <a href="https://app.skattio.se" class="btn-glow">Kom igång nu &rarr;</a>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer>
+  <div class="footer-inner">
+    <a href="#" class="footer-logo">Skatti<span>o</span></a>
+    <nav class="footer-links">
+      <a href="https://app.skattio.se">Logga in</a>
+      <a href="#faq">Vanliga frågor</a>
+      <a href="#priser">Priser</a>
+      <a href="#">Användarvillkor</a>
+      <a href="#">Integritetspolicy</a>
+      <a href="#">Cookies</a>
+      <a href="#">GDPR</a>
+    </nav>
+    <p class="footer-copy">&copy; 2026 Skattio AB. Alla rättigheter förbehållna.</p>
+  </div>
+</footer>
+
+<script>
+// Header scroll
+const header = document.getElementById('site-header');
+window.addEventListener('scroll', () => {
+  header.classList.toggle('scrolled', window.scrollY > 20);
+}, { passive: true });
+
+// Scroll reveal
+const reveals = document.querySelectorAll('.reveal');
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+      observer.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.1 });
+reveals.forEach(el => observer.observe(el));
+
+// FAQ accordion
+document.querySelectorAll('.faq-question').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const item = btn.parentElement;
+    const answer = item.querySelector('.faq-answer');
+    const isOpen = item.classList.contains('open');
+
+    document.querySelectorAll('.faq-item').forEach(faq => {
+      faq.classList.remove('open');
+      faq.querySelector('.faq-answer').style.maxHeight = null;
+      faq.querySelector('.faq-question').setAttribute('aria-expanded', 'false');
+    });
+
+    if (!isOpen) {
+      item.classList.add('open');
+      answer.style.maxHeight = answer.scrollHeight + 'px';
+      btn.setAttribute('aria-expanded', 'true');
+    }
+  });
+});
+</script>
+</body>
+</html>
