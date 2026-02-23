@@ -7,9 +7,9 @@ import { motion } from "framer-motion";
 import { siteConfig } from "@/config/site";
 
 const navLinks = [
-  { label: "Hur det fungerar", href: "#hur-det-fungerar" },
-  { label: "Tjänster", href: "#tjanster" },
-  { label: "FAQ", href: "#faq" },
+  { label: "Hur det fungerar", href: "/#hur-det-fungerar" },
+  { label: "Tjänster", href: "/#tjanster" },
+  { label: "FAQ", href: "/#faq" },
 ];
 
 const PILL_DURATION = 0.7;
