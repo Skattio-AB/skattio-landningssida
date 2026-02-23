@@ -1,18 +1,12 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import { getConsent, setConsent } from "@/lib/consent";
 
 export function CookieBanner() {
-  const [visible, setVisible] = useState(false);
-
-  useEffect(() => {
-    if (getConsent() === null) {
-      setVisible(true);
-    }
-  }, []);
+  const [visible, setVisible] = useState(() => getConsent() === null);
 
   function handleAccept() {
     setConsent("granted");

@@ -5,11 +5,9 @@ import { Analytics } from "@vercel/analytics/next";
 import { getConsent } from "@/lib/consent";
 
 export function AnalyticsProvider() {
-  const [hasConsent, setHasConsent] = useState(false);
+  const [hasConsent, setHasConsent] = useState(() => getConsent() === "granted");
 
   useEffect(() => {
-    setHasConsent(getConsent() === "granted");
-
     const handler = () => setHasConsent(getConsent() === "granted");
     window.addEventListener("consent-updated", handler);
     return () => window.removeEventListener("consent-updated", handler);

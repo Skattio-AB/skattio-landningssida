@@ -30,12 +30,11 @@ function useInView(ref: React.RefObject<HTMLElement | null>, once = true) {
 }
 
 function usePrefersReducedMotion() {
-  const [reduced, setReduced] = useState(false);
-  useEffect(() => {
-    setReduced(
+  const [reduced] = useState(
+    () =>
+      typeof window !== "undefined" &&
       window.matchMedia("(prefers-reduced-motion: reduce)").matches
-    );
-  }, []);
+  );
   return reduced;
 }
 
@@ -62,8 +61,8 @@ function AnimatedValue({
   useEffect(() => {
     if (!animate) return;
     if (reducedMotion) {
-      setValue(target);
-      return;
+      const raf = requestAnimationFrame(() => setValue(target));
+      return () => cancelAnimationFrame(raf);
     }
     const timeout = setTimeout(() => {
       const start = performance.now();
