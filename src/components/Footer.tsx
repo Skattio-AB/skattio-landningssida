@@ -16,7 +16,7 @@ export function Footer() {
               height={24}
             />
           </Link>
-          <span className="text-xs text-white/25">
+          <span className="text-xs text-white/50">
             &copy; {new Date().getFullYear()} Skattio AB
           </span>
         </div>
@@ -25,31 +25,31 @@ export function Footer() {
         <nav className="flex flex-wrap justify-center gap-5">
           <a
             href="#faq"
-            className="font-heading text-xs font-medium text-white/35 transition-colors duration-200 hover:text-white/70"
+            className="font-heading text-xs font-medium text-white/60 transition-colors duration-200 hover:text-white/90"
           >
             FAQ
           </a>
           <Link
             href="/anvandarvillkor"
-            className="font-heading text-xs font-medium text-white/35 transition-colors duration-200 hover:text-white/70"
+            className="font-heading text-xs font-medium text-white/60 transition-colors duration-200 hover:text-white/90"
           >
             Användarvillkor
           </Link>
           <Link
             href="/integritetspolicy"
-            className="font-heading text-xs font-medium text-white/35 transition-colors duration-200 hover:text-white/70"
+            className="font-heading text-xs font-medium text-white/60 transition-colors duration-200 hover:text-white/90"
           >
             Integritet
           </Link>
           <Link
             href="/cookies"
-            className="font-heading text-xs font-medium text-white/35 transition-colors duration-200 hover:text-white/70"
+            className="font-heading text-xs font-medium text-white/60 transition-colors duration-200 hover:text-white/90"
           >
             Cookies
           </Link>
           <Link
             href="/gdpr"
-            className="font-heading text-xs font-medium text-white/35 transition-colors duration-200 hover:text-white/70"
+            className="font-heading text-xs font-medium text-white/60 transition-colors duration-200 hover:text-white/90"
           >
             GDPR
           </Link>

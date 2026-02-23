@@ -23,8 +23,7 @@ export function CTA() {
           Redo att deklarera smartare?
         </h2>
         <p className="mt-3 text-[17px] text-navy-300">
-          Vi lanserar snart &mdash; skriv upp dig f&ouml;r att bli f&ouml;rst
-          med att testa.
+          Vi lanserar snart.
         </p>
       </motion.div>
     </section>
