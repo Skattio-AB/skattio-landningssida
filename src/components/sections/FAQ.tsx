@@ -1,7 +1,11 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { fadeUp, slideUp, staggerContainer } from "@/lib/animations";
+import {
+  fadeUp,
+  slideFromLeft,
+  staggerContainer,
+} from "@/lib/animations";
 import {
   Accordion,
   AccordionContent,
@@ -51,15 +55,14 @@ export function FAQ() {
   return (
     <section id="faq" className="bg-neutral-50 py-24 sm:py-28">
       <div className="mx-auto max-w-[980px] px-6">
-        <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-100px" }}
-          variants={staggerContainer}
-          className="grid gap-10 lg:grid-cols-[1fr,1.5fr] lg:gap-16"
-        >
+        <div className="grid gap-10 lg:grid-cols-[1fr,1.5fr] lg:gap-16">
           {/* Left: heading (sticky on desktop) */}
-          <motion.div variants={slideUp}>
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-100px" }}
+            variants={slideFromLeft}
+          >
             <span className="font-mono text-xs font-medium uppercase tracking-wider text-accent-500">
               FAQ
             </span>
@@ -72,25 +75,31 @@ export function FAQ() {
           </motion.div>
 
           {/* Right: accordion */}
-          <motion.div variants={fadeUp}>
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-100px" }}
+            variants={staggerContainer}
+          >
             <Accordion type="single" collapsible>
               {faqs.map((faq, i) => (
-                <AccordionItem
-                  key={i}
-                  value={`faq-${i}`}
-                  className={`border-b border-neutral-200 px-0 ${i === 0 ? "border-t" : ""}`}
-                >
-                  <AccordionTrigger className="text-left font-heading text-[15px] font-semibold text-neutral-950 hover:no-underline py-5 hover:text-accent-500 transition-colors">
-                    {faq.question}
-                  </AccordionTrigger>
-                  <AccordionContent className="text-[15px] text-neutral-600 leading-[1.7] pb-5">
-                    {faq.answer}
-                  </AccordionContent>
-                </AccordionItem>
+                <motion.div key={i} variants={fadeUp}>
+                  <AccordionItem
+                    value={`faq-${i}`}
+                    className={`border-b border-neutral-200 px-0 ${i === 0 ? "border-t" : ""}`}
+                  >
+                    <AccordionTrigger className="text-left font-heading text-[15px] font-semibold text-neutral-950 hover:no-underline py-5 hover:text-accent-500 transition-colors">
+                      {faq.question}
+                    </AccordionTrigger>
+                    <AccordionContent className="text-[15px] text-neutral-600 leading-[1.7] pb-5">
+                      {faq.answer}
+                    </AccordionContent>
+                  </AccordionItem>
+                </motion.div>
               ))}
             </Accordion>
           </motion.div>
-        </motion.div>
+        </div>
       </div>
     </section>
   );

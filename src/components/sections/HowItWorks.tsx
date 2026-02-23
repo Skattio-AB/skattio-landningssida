@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { fadeUp, slideUp, staggerContainer } from "@/lib/animations";
+import { fadeUp, slideUp, staggerContainerSlow } from "@/lib/animations";
 
 const steps = [
   {
@@ -51,7 +51,7 @@ export function HowItWorks() {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-100px" }}
-          variants={staggerContainer}
+          variants={staggerContainerSlow}
           className="mt-14 grid gap-8 sm:grid-cols-3"
         >
           {steps.map((step) => (

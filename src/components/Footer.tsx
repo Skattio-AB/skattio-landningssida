@@ -1,11 +1,21 @@
+"use client";
+
 import Link from "next/link";
 import Image from "next/image";
+import { motion } from "framer-motion";
 import { siteConfig } from "@/config/site";
+import { fadeIn } from "@/lib/animations";
 
 export function Footer() {
   return (
     <footer className="border-t border-white/[0.06] bg-navy-950">
-      <div className="mx-auto flex max-w-[980px] flex-col items-center gap-5 px-6 py-10 sm:flex-row sm:justify-between">
+      <motion.div
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, margin: "-50px" }}
+        variants={fadeIn}
+        className="mx-auto flex max-w-[980px] flex-col items-center gap-5 px-6 py-10 sm:flex-row sm:justify-between"
+      >
         {/* Left: logo + copyright */}
         <div className="flex flex-col gap-2 max-sm:items-center">
           <Link href="/">
@@ -54,7 +64,7 @@ export function Footer() {
             GDPR
           </Link>
         </nav>
-      </div>
+      </motion.div>
     </footer>
   );
 }

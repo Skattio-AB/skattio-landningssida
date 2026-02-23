@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { scaleUp, slideUp, staggerContainer } from "@/lib/animations";
+import { scaleUp, slideUp, staggerContainerSlow } from "@/lib/animations";
 import { Sparkles, Shield, Banknote, Zap } from "lucide-react";
 
 const usps = [
@@ -57,13 +57,14 @@ export function WhySkattio() {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-100px" }}
-          variants={staggerContainer}
+          variants={staggerContainerSlow}
           className="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-4"
         >
           {usps.map((usp) => (
             <motion.div
               key={usp.title}
               variants={scaleUp}
+              whileHover={{ y: -4, transition: { duration: 0.2 } }}
               className="rounded-xl border border-neutral-200/60 bg-white p-7 shadow-[0_1px_2px_rgba(10,15,30,0.04)] transition-all duration-200 hover:border-neutral-300 hover:shadow-[0_8px_30px_rgba(10,15,30,0.08)]"
             >
               <div className="mb-4 flex h-11 w-11 items-center justify-center rounded-xl bg-accent-50">
