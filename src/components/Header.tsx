@@ -41,23 +41,21 @@ export function Header() {
         paddingLeft: { duration: PILL_DURATION, ease: PILL_EASE },
         paddingRight: { duration: PILL_DURATION, ease: PILL_EASE },
       }}
-      className={`sticky top-0 z-50 transition-colors duration-300 ${
-        scrolled ? "bg-neutral-50/80 backdrop-blur-xl" : "bg-transparent"
-      }`}
+      className="sticky top-0 z-50 bg-transparent"
     >
       <motion.div
         animate={{
-          height: scrolled ? 48 : 64,
+          height: scrolled ? 52 : 72,
           maxWidth: scrolled ? 980 : 2000,
           borderRadius: scrolled ? 9999 : 0,
           boxShadow: scrolled
-            ? "0 1px 3px rgba(10,15,30,0.04)"
-            : "0 0px 0px rgba(10,15,30,0)",
+            ? "0 1px 2px rgba(10,15,30,0.04)"
+            : "0 1px 4px rgba(10,15,30,0.06)",
           borderColor: scrolled
             ? "rgba(229,229,229,0.6)"
-            : "rgba(229,229,229,0)",
-          paddingLeft: scrolled ? 20 : 32,
-          paddingRight: scrolled ? 20 : 32,
+            : "rgba(229,229,229,0.5)",
+          paddingLeft: scrolled ? 24 : 36,
+          paddingRight: scrolled ? 24 : 36,
         }}
         transition={{
           height: { duration: PILL_DURATION, ease: PILL_EASE },
@@ -68,24 +66,26 @@ export function Header() {
           paddingLeft: { duration: PILL_DURATION, ease: PILL_EASE },
           paddingRight: { duration: PILL_DURATION, ease: PILL_EASE },
         }}
-        className="mx-auto flex items-center justify-between border bg-white"
+        className={`mx-auto flex items-center justify-between border ${
+          scrolled ? "bg-white/90 backdrop-blur-xl" : "bg-white"
+        }`}
       >
         <Link href="/">
           <Image
             src="/images/skattio_fixed2_light.svg"
             alt={siteConfig.name}
-            width={110}
-            height={24}
+            width={160}
+            height={35}
             priority
           />
         </Link>
 
-        <nav className="flex items-center gap-1">
+        <nav className="flex items-center gap-2">
           {navLinks.map((link) => (
             <a
               key={link.href}
               href={link.href}
-              className="rounded-full px-3.5 py-2 font-heading text-[14px] font-medium text-neutral-500 transition-colors duration-200 hover:bg-neutral-100 hover:text-neutral-950"
+              className="rounded-full px-4 py-2.5 font-heading text-[15px] font-medium text-neutral-500 transition-colors duration-200 hover:bg-neutral-100 hover:text-neutral-950"
             >
               {link.label}
             </a>
