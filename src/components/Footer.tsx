@@ -20,10 +20,10 @@ export function Footer() {
         <div className="flex flex-col gap-2 max-sm:items-center">
           <Link href="/">
             <Image
-              src="/images/skattio_fixed2_dark.svg"
+              src="/images/skattio_jakarta_dark.svg"
               alt={siteConfig.name}
-              width={100}
-              height={24}
+              width={180}
+              height={36}
             />
           </Link>
           <span className="text-xs text-white/50">

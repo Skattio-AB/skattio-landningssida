@@ -110,12 +110,12 @@ export function Header() {
         >
           <Link href="/">
             <Image
-              src="/images/skattio_fixed2_light.svg"
+              src="/images/skattio_jakarta.svg"
               alt={siteConfig.name}
-              width={160}
-              height={35}
+              width={220}
+              height={44}
               priority
-              className="w-[120px] sm:w-[160px]"
+              className="w-[160px] sm:w-[220px]"
             />
           </Link>
 
