@@ -110,7 +110,7 @@ export function Header() {
         >
           <Link href="/">
             <Image
-              src="/images/skattio_jakarta.svg"
+              src="/images/skattio_updated.svg"
               alt={siteConfig.name}
               width={220}
               height={44}
