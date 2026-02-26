@@ -17,7 +17,7 @@ const faqs = [
   {
     question: "Vad är Skattio?",
     answer:
-      "Skattio är en digital tjänst som hjälper dig deklarera enklare. Vi guidar dig steg för steg med en wizard och AI-stöd, och genererar färdiga blanketter (K5/K6) som du kan skicka in till Skatteverket.",
+      "Skattio är en digital tjänst som hjälper dig deklarera enklare. Vi guidar dig steg för steg med vår tjänst och AI-stöd, och genererar färdiga blanketter (K5/K6) som du kan skicka in till Skatteverket.",
   },
   {
     question: "Vilka deklarationer stödjer ni?",
@@ -27,7 +27,7 @@ const faqs = [
   {
     question: "Hur fungerar AI-stödet?",
     answer:
-      "Vårt AI-stöd finns tillgängligt direkt i wizarden. Du kan ställa frågor om just det steg du arbetar med, och få förklaringar anpassade efter din situation. AI:t har kunskap om svenska skatteregler.",
+      "Vårt AI-stöd finns tillgängligt direkt i tjänsten. Du kan ställa frågor om just det steg du arbetar med, och få förklaringar anpassade efter din situation. AI:t har kunskap om svenska skatteregler.",
   },
   {
     question: "Är min data säker?",

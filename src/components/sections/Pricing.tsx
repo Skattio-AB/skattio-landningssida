@@ -8,7 +8,7 @@ import { siteConfig } from "@/config/site";
 import { Check, ArrowRight } from "lucide-react";
 
 const included = [
-  "Guidad steg-för-steg wizard",
+  "Guidad steg-för-steg tjänst",
   "AI-stöd för frågor",
   "Automatisk beräkning av vinst/förlust",
   "Uppskovsberäkning",

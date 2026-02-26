@@ -8,13 +8,13 @@ const steps = [
     number: "01",
     title: "Svara på frågor",
     description:
-      "Vår guidade wizard tar dig steg för steg genom alla uppgifter som behövs. Inget krångel, bara enkla frågor.",
+      "Vår guidade tjänst tar dig steg för steg genom alla uppgifter som behövs. Inget krångel, bara enkla frågor.",
   },
   {
     number: "02",
     title: "Granska med AI-stöd",
     description:
-      "Vårt AI-stöd hjälper dig dubbelkolla allt. Ställ frågor direkt i wizarden om du undrar något.",
+      "Vårt AI-stöd hjälper dig dubbelkolla allt. Ställ frågor direkt i tjänsten om du undrar något.",
   },
   {
     number: "03",

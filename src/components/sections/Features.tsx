@@ -26,7 +26,7 @@ const features = [
   },
   {
     icon: MessageSquare,
-    title: "AI-stöd i wizarden",
+    title: "AI-stöd i tjänsten",
     description:
       "Osäker på en fråga? Vårt AI-stöd förklarar och hjälper dig direkt i steget du arbetar med.",
   },
