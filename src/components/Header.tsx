@@ -55,7 +55,7 @@ export function Header() {
         initial={{ opacity: 0 }}
         animate={{
           opacity: 1,
-          paddingTop: scrolled ? (isMobile ? 8 : 16) : 0,
+          paddingTop: scrolled ? (isMobile ? 8 : 16) : 12,
           paddingBottom: scrolled ? (isMobile ? 4 : 8) : 0,
           paddingLeft: scrolled ? (isMobile ? 12 : 24) : 0,
           paddingRight: scrolled ? (isMobile ? 12 : 24) : 0,
@@ -112,10 +112,10 @@ export function Header() {
             <Image
               src="/Logodark.svg"
               alt={siteConfig.name}
-              width={176}
-              height={44}
+              width={150}
+              height={37}
               priority
-              className="mt-1 w-[140px] sm:w-[176px]"
+              className="mt-1 w-[119px] sm:w-[150px]"
             />
           </Link>
 
