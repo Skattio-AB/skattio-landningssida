@@ -59,7 +59,7 @@ export function Services() {
             <motion.div
               key={service.title}
               variants={scaleUp}
-              className="rounded-xl border border-neutral-200/60 bg-white p-7 shadow-[0_1px_2px_rgba(10,15,30,0.04)] transition-all duration-200 hover:border-neutral-300 hover:shadow-[0_8px_30px_rgba(10,15,30,0.08)]"
+              className="rounded-xl border border-neutral-200/60 bg-white p-7 shadow-[0_1px_2px_rgba(10,15,30,0.04)] transition-[box-shadow,border-color] duration-200 hover:border-neutral-300 hover:shadow-[0_8px_30px_rgba(10,15,30,0.08)]"
             >
               <span className="mb-4 inline-flex items-center gap-1.5 rounded-md bg-accent-50 px-2.5 py-1 font-heading text-[11px] font-semibold uppercase tracking-wide text-accent-500">
                 Kommer snart

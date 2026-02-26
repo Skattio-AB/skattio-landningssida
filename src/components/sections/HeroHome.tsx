@@ -4,39 +4,14 @@ import { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import { Check, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { blurIn, fadeUp, staggerContainer } from "@/lib/animations";
-
-/* ------------------------------------------------------------------ */
-/*  Hooks                                                              */
-/* ------------------------------------------------------------------ */
-
-function useInView(ref: React.RefObject<HTMLElement | null>, once = true) {
-  const [inView, setInView] = useState(false);
-  useEffect(() => {
-    if (!ref.current) return;
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setInView(true);
-          if (once) observer.disconnect();
-        }
-      },
-      { threshold: 0.15 }
-    );
-    observer.observe(ref.current);
-    return () => observer.disconnect();
-  }, [ref, once]);
-  return inView;
-}
-
-function usePrefersReducedMotion() {
-  const [reduced] = useState(
-    () =>
-      typeof window !== "undefined" &&
-      window.matchMedia("(prefers-reduced-motion: reduce)").matches
-  );
-  return reduced;
-}
+import {
+  blurIn,
+  fadeUp,
+  staggerContainer,
+  useInView,
+  usePrefersReducedMotion,
+  useShouldReduceMotion,
+} from "@/lib/animations";
 
 /* ------------------------------------------------------------------ */
 /*  Animated value counter                                             */
@@ -104,7 +79,7 @@ function FloatingBadge({
   floatDistance: number;
   isVisible: boolean;
 }) {
-  const reducedMotion = usePrefersReducedMotion();
+  const shouldReduce = useShouldReduceMotion();
   return (
     <motion.div
       initial={{ opacity: 0, y: 10 }}
@@ -114,7 +89,7 @@ function FloatingBadge({
     >
       <motion.div
         animate={
-          isVisible && !reducedMotion
+          isVisible && !shouldReduce
             ? { y: [0, -floatDistance, 0, floatDistance * 0.6, 0] }
             : {}
         }
@@ -196,6 +171,7 @@ export function HeroHome() {
   const frameRef = useRef<HTMLDivElement>(null);
   const frameInView = useInView(frameRef);
   const reducedMotion = usePrefersReducedMotion();
+  const shouldReduce = useShouldReduceMotion();
 
   const utanValues = cumulativeData.map((d) => d.utan);
   const medValues = cumulativeData.map((d) => d.med);
@@ -208,37 +184,47 @@ export function HeroHome() {
 
   return (
     <section className="relative overflow-hidden bg-neutral-50 pt-24 pb-20 sm:pt-28 sm:pb-24">
-      {/* Animated background orbs */}
-      <motion.div
-        animate={{
-          x: [0, 30, -20, 0],
-          y: [0, -40, 20, 0],
-          scale: [1, 1.1, 0.95, 1],
-          rotate: [0, 3, -2, 0],
-        }}
-        transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-        className="pointer-events-none absolute top-[60%] left-[10%] h-[600px] w-[600px] rounded-full bg-[rgba(232,89,12,0.08)] opacity-40 blur-[120px]"
-      />
-      <motion.div
-        animate={{
-          x: [0, -25, 15, 0],
-          y: [0, 30, -25, 0],
-          scale: [1, 0.95, 1.08, 1],
-          rotate: [0, -2, 3, 0],
-        }}
-        transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
-        className="pointer-events-none absolute top-[30%] right-[5%] h-[600px] w-[600px] rounded-full bg-[rgba(59,130,246,0.05)] opacity-40 blur-[120px]"
-      />
-      <motion.div
-        animate={{
-          x: [0, 20, -30, 0],
-          y: [0, -20, 35, 0],
-          scale: [1, 1.05, 0.97, 1],
-          rotate: [0, 2, -3, 0],
-        }}
-        transition={{ duration: 18, repeat: Infinity, ease: "linear" }}
-        className="pointer-events-none absolute top-[10%] left-[50%] h-[400px] w-[400px] -translate-x-1/2 rounded-full bg-[rgba(232,89,12,0.04)] opacity-30 blur-[100px]"
-      />
+      {/* Background orbs — static on mobile, animated on desktop */}
+      {shouldReduce ? (
+        <>
+          <div className="pointer-events-none absolute top-[60%] left-[10%] h-[600px] w-[600px] rounded-full bg-[rgba(232,89,12,0.08)] opacity-40 blur-[120px]" />
+          <div className="pointer-events-none absolute top-[30%] right-[5%] h-[600px] w-[600px] rounded-full bg-[rgba(59,130,246,0.05)] opacity-40 blur-[120px]" />
+          <div className="pointer-events-none absolute top-[10%] left-[50%] h-[400px] w-[400px] -translate-x-1/2 rounded-full bg-[rgba(232,89,12,0.04)] opacity-30 blur-[100px]" />
+        </>
+      ) : (
+        <>
+          <motion.div
+            animate={{
+              x: [0, 30, -20, 0],
+              y: [0, -40, 20, 0],
+              scale: [1, 1.1, 0.95, 1],
+              rotate: [0, 3, -2, 0],
+            }}
+            transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+            className="pointer-events-none absolute top-[60%] left-[10%] h-[600px] w-[600px] rounded-full bg-[rgba(232,89,12,0.08)] opacity-40 blur-[120px]"
+          />
+          <motion.div
+            animate={{
+              x: [0, -25, 15, 0],
+              y: [0, 30, -25, 0],
+              scale: [1, 0.95, 1.08, 1],
+              rotate: [0, -2, 3, 0],
+            }}
+            transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
+            className="pointer-events-none absolute top-[30%] right-[5%] h-[600px] w-[600px] rounded-full bg-[rgba(59,130,246,0.05)] opacity-40 blur-[120px]"
+          />
+          <motion.div
+            animate={{
+              x: [0, 20, -30, 0],
+              y: [0, -20, 35, 0],
+              scale: [1, 1.05, 0.97, 1],
+              rotate: [0, 2, -3, 0],
+            }}
+            transition={{ duration: 18, repeat: Infinity, ease: "linear" }}
+            className="pointer-events-none absolute top-[10%] left-[50%] h-[400px] w-[400px] -translate-x-1/2 rounded-full bg-[rgba(232,89,12,0.04)] opacity-30 blur-[100px]"
+          />
+        </>
+      )}
 
       {/* Text content */}
       <motion.div
@@ -333,7 +319,7 @@ export function HeroHome() {
               </span>
             </div>
 
-            {/* SVG Line Graph */}
+            {/* SVG Line Graph — static labels/grid, animated lines only */}
             <svg
               viewBox="0 0 600 320"
               className="w-full h-auto"
@@ -353,11 +339,11 @@ export function HeroHome() {
                 </linearGradient>
               </defs>
 
-              {/* Grid lines */}
+              {/* Grid lines — plain SVG */}
               {gridLines.map((val, i) => {
                 const y = CHART_Y + CHART_H - (val / Y_MAX) * CHART_H;
                 return (
-                  <motion.line
+                  <line
                     key={`grid-${i}`}
                     x1={CHART_X}
                     y1={y}
@@ -365,20 +351,15 @@ export function HeroHome() {
                     y2={y}
                     stroke="#F5F5F5"
                     strokeWidth={1}
-                    initial={reducedMotion ? { opacity: 1 } : { opacity: 0 }}
-                    animate={
-                      frameInView ? { opacity: 1 } : reducedMotion ? { opacity: 1 } : { opacity: 0 }
-                    }
-                    transition={{ duration: 0.4, delay: 0.6 }}
                   />
                 );
               })}
 
-              {/* Y-axis labels */}
+              {/* Y-axis labels — plain SVG */}
               {gridLines.map((val, i) => {
                 const y = CHART_Y + CHART_H - (val / Y_MAX) * CHART_H;
                 return (
-                  <motion.text
+                  <text
                     key={`y-label-${i}`}
                     x={CHART_X - 8}
                     y={y + 3}
@@ -386,24 +367,19 @@ export function HeroHome() {
                     fontFamily="Inter, sans-serif"
                     fontSize={10}
                     fill="#A3A3A3"
-                    initial={reducedMotion ? { opacity: 1 } : { opacity: 0 }}
-                    animate={
-                      frameInView ? { opacity: 1 } : reducedMotion ? { opacity: 1 } : { opacity: 0 }
-                    }
-                    transition={{ duration: 0.4, delay: 0.6 }}
                   >
                     {gridLabels[i]}
-                  </motion.text>
+                  </text>
                 );
               })}
 
-              {/* X-axis labels */}
+              {/* X-axis labels — plain SVG */}
               {cumulativeData.map((d, i) => {
                 if (i === 0) return null;
                 const x =
                   CHART_X + (i / (cumulativeData.length - 1)) * CHART_W;
                 return (
-                  <motion.text
+                  <text
                     key={`x-label-${i}`}
                     x={x}
                     y={baselineY + 16}
@@ -411,14 +387,9 @@ export function HeroHome() {
                     fontFamily="Inter, sans-serif"
                     fontSize={10}
                     fill="#737373"
-                    initial={reducedMotion ? { opacity: 1 } : { opacity: 0 }}
-                    animate={
-                      frameInView ? { opacity: 1 } : reducedMotion ? { opacity: 1 } : { opacity: 0 }
-                    }
-                    transition={{ duration: 0.4, delay: 0.6 }}
                   >
                     {d.label}
-                  </motion.text>
+                  </text>
                 );
               })}
 
@@ -433,7 +404,7 @@ export function HeroHome() {
                 transition={{ duration: 0.6, delay: 1.4 }}
               />
 
-              {/* "Utan" line */}
+              {/* "Utan" line — GPU-efficient pathLength animation */}
               <motion.path
                 d={utanPath}
                 fill="none"
@@ -452,7 +423,7 @@ export function HeroHome() {
                 transition={{ duration: 1.2, ease: chartEasing, delay: 0.8 }}
               />
 
-              {/* "Med" line */}
+              {/* "Med" line — GPU-efficient pathLength animation */}
               <motion.path
                 d={medPath}
                 fill="none"
@@ -471,28 +442,20 @@ export function HeroHome() {
                 transition={{ duration: 1.2, ease: chartEasing, delay: 0.8 }}
               />
 
-              {/* "Utan" dots */}
+              {/* "Utan" dots — plain SVG */}
               {utanPoints.map((p, i) => (
-                <motion.circle
+                <circle
                   key={`utan-dot-${i}`}
                   cx={p.x}
                   cy={p.y}
                   r={3}
                   fill="#B0B9D1"
-                  initial={reducedMotion ? { opacity: 1 } : { opacity: 0 }}
-                  animate={
-                    frameInView ? { opacity: 1 } : reducedMotion ? { opacity: 1 } : { opacity: 0 }
-                  }
-                  transition={{
-                    duration: 0.3,
-                    delay: 0.8 + (i / (utanPoints.length - 1)) * 1.2,
-                  }}
                 />
               ))}
 
-              {/* "Med" dots */}
+              {/* "Med" dots — plain SVG */}
               {medPoints.map((p, i) => (
-                <motion.circle
+                <circle
                   key={`med-dot-${i}`}
                   cx={p.x}
                   cy={p.y}
@@ -500,14 +463,6 @@ export function HeroHome() {
                   fill="#10B981"
                   stroke="white"
                   strokeWidth={2}
-                  initial={reducedMotion ? { opacity: 1 } : { opacity: 0 }}
-                  animate={
-                    frameInView ? { opacity: 1 } : reducedMotion ? { opacity: 1 } : { opacity: 0 }
-                  }
-                  transition={{
-                    duration: 0.3,
-                    delay: 0.8 + (i / (medPoints.length - 1)) * 1.2,
-                  }}
                 />
               ))}
             </svg>

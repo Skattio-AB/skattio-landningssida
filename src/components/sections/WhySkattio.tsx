@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { scaleUp, slideUp, staggerContainerSlow } from "@/lib/animations";
+import { scaleUp, slideUp, staggerContainerSlow, useIsMobile } from "@/lib/animations";
 import { Sparkles, Shield, Banknote, Zap } from "lucide-react";
 
 const usps = [
@@ -32,6 +32,8 @@ const usps = [
 ];
 
 export function WhySkattio() {
+  const isMobile = useIsMobile();
+
   return (
     <section className="bg-neutral-100 py-24 sm:py-28">
       <div className="mx-auto max-w-6xl px-6">
@@ -64,8 +66,8 @@ export function WhySkattio() {
             <motion.div
               key={usp.title}
               variants={scaleUp}
-              whileHover={{ y: -4, transition: { duration: 0.2 } }}
-              className="rounded-xl border border-neutral-200/60 bg-white p-7 shadow-[0_1px_2px_rgba(10,15,30,0.04)] transition-all duration-200 hover:border-neutral-300 hover:shadow-[0_8px_30px_rgba(10,15,30,0.08)]"
+              whileHover={isMobile ? undefined : { y: -4, transition: { duration: 0.2 } }}
+              className="rounded-xl border border-neutral-200/60 bg-white p-7 shadow-[0_1px_2px_rgba(10,15,30,0.04)] transition-[box-shadow,border-color] duration-200 hover:border-neutral-300 hover:shadow-[0_8px_30px_rgba(10,15,30,0.08)]"
             >
               <div className="mb-4 flex h-11 w-11 items-center justify-center rounded-xl bg-accent-50">
                 <usp.icon className="h-[18px] w-[18px] text-accent-500" />

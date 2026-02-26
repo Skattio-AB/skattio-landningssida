@@ -5,7 +5,9 @@ import Link from "next/link";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
+import { cn } from "@/lib/utils";
 import { siteConfig } from "@/config/site";
+
 const mobileNavContainer: import("framer-motion").Variants = {
   hidden: {},
   visible: {
@@ -36,16 +38,17 @@ const navLinks = [
   { label: "FAQ", href: "/#faq" },
 ];
 
-const PILL_DURATION = 0.7;
-const PILL_EASE: [number, number, number, number] = [0.16, 1, 0.3, 1];
-const SM_BREAKPOINT = 640;
-
 export function Header() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
+  const [mounted, setMounted] = useState(false);
 
   const closeMenu = useCallback(() => setMenuOpen(false), []);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 20);
@@ -55,7 +58,7 @@ export function Header() {
 
   useEffect(() => {
     const checkMobile = () => {
-      const mobile = window.innerWidth < SM_BREAKPOINT;
+      const mobile = window.innerWidth < 640;
       setIsMobile(mobile);
       if (!mobile) setMenuOpen(false);
     };
@@ -73,62 +76,32 @@ export function Header() {
 
   return (
     <>
-      <motion.header
-        initial={{ opacity: 0 }}
-        animate={{
-          opacity: 1,
-          paddingTop: scrolled ? (isMobile ? 8 : 16) : 12,
-          paddingBottom: scrolled ? (isMobile ? 4 : 8) : 0,
-          paddingLeft: scrolled ? (isMobile ? 12 : 24) : 0,
-          paddingRight: scrolled ? (isMobile ? 12 : 24) : 0,
-        }}
-        transition={{
-          opacity: { duration: 0.4, ease: [0, 0, 0.2, 1] },
-          paddingTop: { duration: PILL_DURATION, ease: PILL_EASE },
-          paddingBottom: { duration: PILL_DURATION, ease: PILL_EASE },
-          paddingLeft: { duration: PILL_DURATION, ease: PILL_EASE },
-          paddingRight: { duration: PILL_DURATION, ease: PILL_EASE },
-        }}
-        className="sticky top-0 z-50 bg-transparent"
+      <header
+        className={cn(
+          "sticky top-0 z-50 bg-transparent transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)]",
+          !mounted && "opacity-0",
+          mounted && "opacity-100",
+          scrolled
+            ? isMobile
+              ? "pt-2 pb-1 px-3"
+              : "pt-4 pb-2 px-6"
+            : "pt-3 pb-0 px-0"
+        )}
       >
-        <motion.div
-          animate={{
-            height: scrolled
+        <div
+          className={cn(
+            "mx-auto flex items-center justify-between border transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)]",
+            scrolled
+              ? "max-w-[980px] rounded-full bg-white/90 backdrop-blur-xl shadow-[0_1px_2px_rgba(10,15,30,0.04)] border-neutral-200/60"
+              : "max-w-[2000px] rounded-none bg-white shadow-[0_1px_4px_rgba(10,15,30,0.06)] border-neutral-200/50",
+            scrolled
               ? isMobile
-                ? 44
-                : 52
+                ? "h-11 px-4"
+                : "h-[52px] px-6"
               : isMobile
-                ? 56
-                : 72,
-            maxWidth: scrolled ? 980 : 2000,
-            borderRadius: scrolled ? 9999 : 0,
-            boxShadow: scrolled
-              ? "0 1px 2px rgba(10,15,30,0.04)"
-              : "0 1px 4px rgba(10,15,30,0.06)",
-            borderColor: scrolled
-              ? "rgba(229,229,229,0.6)"
-              : "rgba(229,229,229,0.5)",
-            paddingLeft: scrolled ? (isMobile ? 16 : 24) : isMobile ? 20 : 36,
-            paddingRight: scrolled
-              ? isMobile
-                ? 16
-                : 24
-              : isMobile
-                ? 20
-                : 36,
-          }}
-          transition={{
-            height: { duration: PILL_DURATION, ease: PILL_EASE },
-            maxWidth: { duration: PILL_DURATION, ease: PILL_EASE },
-            borderRadius: { duration: PILL_DURATION, ease: PILL_EASE },
-            boxShadow: { duration: PILL_DURATION, ease: PILL_EASE },
-            borderColor: { duration: 0.5, ease: PILL_EASE },
-            paddingLeft: { duration: PILL_DURATION, ease: PILL_EASE },
-            paddingRight: { duration: PILL_DURATION, ease: PILL_EASE },
-          }}
-          className={`mx-auto flex items-center justify-between border ${
-            scrolled ? "bg-white/90 backdrop-blur-xl" : "bg-white"
-          }`}
+                ? "h-14 px-5"
+                : "h-[72px] px-9"
+          )}
         >
           <Link href="/">
             <Image
@@ -187,8 +160,8 @@ export function Header() {
               )}
             </AnimatePresence>
           </button>
-        </motion.div>
-      </motion.header>
+        </div>
+      </header>
 
       {/* Mobile full-screen overlay */}
       <AnimatePresence>

@@ -4,6 +4,7 @@ import { PartnerBanner } from "@/components/sections/PartnerBanner";
 import { HowItWorks } from "@/components/sections/HowItWorks";
 import { Services } from "@/components/sections/Services";
 import { WhySkattio } from "@/components/sections/WhySkattio";
+import { News } from "@/components/sections/News";
 import { FAQ } from "@/components/sections/FAQ";
 import { CTA } from "@/components/sections/CTA";
 import { Footer } from "@/components/Footer";
@@ -18,6 +19,7 @@ export default function Home() {
         <HowItWorks />
         <Services />
         <WhySkattio />
+        <News />
         <FAQ />
         <CTA />
       </main>

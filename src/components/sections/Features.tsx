@@ -81,7 +81,7 @@ export function Features() {
             <motion.div
               key={feature.title}
               variants={scaleUp}
-              className="group rounded-xl border border-neutral-200/80 bg-white p-6 shadow-[0_1px_3px_rgba(10,15,30,0.04),0_1px_2px_rgba(10,15,30,0.02)] transition-all duration-300 hover:shadow-[0_4px_16px_rgba(10,15,30,0.08),0_2px_4px_rgba(10,15,30,0.04)] hover:border-neutral-300"
+              className="group rounded-xl border border-neutral-200/80 bg-white p-6 shadow-[0_1px_3px_rgba(10,15,30,0.04),0_1px_2px_rgba(10,15,30,0.02)] transition-[box-shadow,border-color] duration-300 hover:shadow-[0_4px_16px_rgba(10,15,30,0.08),0_2px_4px_rgba(10,15,30,0.04)] hover:border-neutral-300"
             >
               <div className="mb-4 flex h-11 w-11 items-center justify-center rounded-lg bg-navy-50 text-navy-700 transition-colors duration-300 group-hover:bg-navy-100">
                 <feature.icon className="h-5 w-5" />
