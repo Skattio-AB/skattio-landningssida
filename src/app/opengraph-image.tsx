@@ -105,7 +105,7 @@ export default async function Image() {
               maxWidth: 700,
             }}
           >
-            Deklarera enkelt — oavsett om du sålt bostad, hyr ut eller behöver
+            Deklarera enkelt — oavsett om du sålt bostad eller behöver
             hjälp med avdrag.
           </span>
         </div>
