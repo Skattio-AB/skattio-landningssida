@@ -264,8 +264,9 @@ export function HeroHome() {
           Deklarera{" "}
           <span className="bg-linear-to-br from-accent-500 to-warning bg-clip-text text-transparent">
             smartare
-          </span>{" "}
-          med AI-stöd
+          </span>
+          <br className="sm:hidden" />
+          {" "}med AI-stöd
         </motion.h1>
 
         {/* Description */}

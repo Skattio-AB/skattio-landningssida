@@ -6,7 +6,29 @@ import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import { siteConfig } from "@/config/site";
-import { fadeUp, staggerContainer } from "@/lib/animations";
+const mobileNavContainer: import("framer-motion").Variants = {
+  hidden: {},
+  visible: {
+    transition: { staggerChildren: 0.1, delayChildren: 0.1 },
+  },
+  exit: {
+    transition: { staggerChildren: 0.05, staggerDirection: -1 },
+  },
+};
+
+const mobileNavItem: import("framer-motion").Variants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.5, ease: [0, 0, 0.2, 1] },
+  },
+  exit: {
+    opacity: 0,
+    y: -12,
+    transition: { duration: 0.2, ease: [0.4, 0, 1, 1] },
+  },
+};
 
 const navLinks = [
   { label: "Hur det fungerar", href: "/#hur-det-fungerar" },
@@ -174,22 +196,23 @@ export function Header() {
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
+            exit={{ opacity: 0, transition: { duration: 0.2, delay: 0.1 } }}
             transition={{ duration: 0.25, ease: [0, 0, 0.2, 1] }}
             className="fixed inset-0 z-40 bg-white"
           >
             <motion.nav
               className="flex h-full flex-col items-center justify-center gap-2"
-              variants={staggerContainer}
+              variants={mobileNavContainer}
               initial="hidden"
               animate="visible"
+              exit="exit"
             >
               {navLinks.map((link) => (
                 <motion.a
                   key={link.href}
                   href={link.href}
                   onClick={closeMenu}
-                  variants={fadeUp}
+                  variants={mobileNavItem}
                   className="rounded-xl px-6 py-3 font-heading text-xl font-medium text-neutral-700 transition-colors hover:bg-neutral-50 hover:text-neutral-950"
                 >
                   {link.label}

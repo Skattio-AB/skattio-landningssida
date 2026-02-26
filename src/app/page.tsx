@@ -1,5 +1,6 @@
 import { Header } from "@/components/Header";
 import { HeroHome } from "@/components/sections/HeroHome";
+import { PartnerBanner } from "@/components/sections/PartnerBanner";
 import { HowItWorks } from "@/components/sections/HowItWorks";
 import { Services } from "@/components/sections/Services";
 import { WhySkattio } from "@/components/sections/WhySkattio";
@@ -13,6 +14,7 @@ export default function Home() {
       <Header />
       <main>
         <HeroHome />
+        <PartnerBanner />
         <HowItWorks />
         <Services />
         <WhySkattio />
