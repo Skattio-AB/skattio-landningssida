@@ -37,6 +37,14 @@ Header → Hero → HowItWorks → Features → Pricing → FAQ → CTA → Foot
 - Section IDs: `#hur-det-fungerar`, `#funktioner`, `#priser`, `#faq`
 - Container: `mx-auto max-w-6xl px-6`
 
+## Button Style
+
+**Never use orange/accent-colored button backgrounds.** All buttons use the outline style:
+```
+variant="outline" className="h-[52px] px-7 text-[15px] rounded-xl border-neutral-200 text-neutral-600 hover:border-neutral-600 hover:text-neutral-950 transition-all duration-200"
+```
+This is the canonical button style across the entire site (hero, CTA, forms, etc.).
+
 ## Skills
 
 When making **any visual or styling decision**, load the `design-system` skill (`.claude/skills/design-system/SKILL.md`).

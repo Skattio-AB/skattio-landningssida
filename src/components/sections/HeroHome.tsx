@@ -221,10 +221,10 @@ export function HeroHome() {
           som förklarar, beräknar och ser till att allt blir rätt.
         </motion.p>
 
-        {/* Button */}
+        {/* Buttons */}
         <motion.div
           variants={fadeUp}
-          className="mt-9 flex items-center justify-center md:justify-start"
+          className="mt-9 flex flex-wrap items-center justify-center gap-3 md:justify-start"
         >
           <Button
             asChild
@@ -233,6 +233,14 @@ export function HeroHome() {
             className="h-[52px] px-7 text-[15px] rounded-xl border-neutral-200 text-neutral-600 hover:border-neutral-600 hover:text-neutral-950 transition-all duration-200"
           >
             <a href="#tjanster">Utforska tjänster</a>
+          </Button>
+          <Button
+            asChild
+            variant="outline"
+            size="lg"
+            className="h-[52px] px-7 text-[15px] rounded-xl border-neutral-200 text-neutral-600 hover:border-neutral-600 hover:text-neutral-950 transition-all duration-200"
+          >
+            <a href="#vantelista">Skriv upp dig på väntelistan</a>
           </Button>
         </motion.div>
       </motion.div>
