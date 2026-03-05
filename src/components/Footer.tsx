@@ -33,6 +33,12 @@ export function Footer() {
 
         {/* Right: links */}
         <nav className="flex flex-wrap justify-center gap-5">
+          <Link
+            href="/blogg"
+            className="font-heading text-xs font-medium text-white/60 transition-colors duration-200 hover:text-white/90"
+          >
+            Blogg
+          </Link>
           <a
             href="#faq"
             className="font-heading text-xs font-medium text-white/60 transition-colors duration-200 hover:text-white/90"
