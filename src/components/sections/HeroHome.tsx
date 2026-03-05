@@ -2,7 +2,6 @@
 
 import { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
-import { Check, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   blurIn,
@@ -60,51 +59,6 @@ function AnimatedValue({
   );
 }
 
-/* ------------------------------------------------------------------ */
-/*  Floating badge with continuous bobbing                             */
-/* ------------------------------------------------------------------ */
-
-function FloatingBadge({
-  children,
-  className,
-  entryDelay,
-  floatDuration,
-  floatDistance,
-  isVisible,
-}: {
-  children: React.ReactNode;
-  className: string;
-  entryDelay: number;
-  floatDuration: number;
-  floatDistance: number;
-  isVisible: boolean;
-}) {
-  const shouldReduce = useShouldReduceMotion();
-  return (
-    <motion.div
-      initial={{ opacity: 0, y: 10 }}
-      animate={isVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }}
-      transition={{ duration: 0.5, ease: "easeOut", delay: entryDelay }}
-      className={className}
-    >
-      <motion.div
-        animate={
-          isVisible && !shouldReduce
-            ? { y: [0, -floatDistance, 0, floatDistance * 0.6, 0] }
-            : {}
-        }
-        transition={{
-          duration: floatDuration,
-          repeat: Infinity,
-          ease: "easeInOut",
-          delay: entryDelay + 0.5,
-        }}
-      >
-        {children}
-      </motion.div>
-    </motion.div>
-  );
-}
 
 /* ------------------------------------------------------------------ */
 /*  Cumulative data                                                    */
@@ -226,12 +180,15 @@ export function HeroHome() {
         </>
       )}
 
+      {/* Two-column layout */}
+      <div className="relative z-10 mx-auto max-w-6xl px-6 flex flex-col md:flex-row md:items-center md:gap-12">
+
       {/* Text content */}
       <motion.div
         variants={staggerContainer}
         initial="hidden"
         animate="visible"
-        className="relative z-10 mx-auto max-w-[720px] px-6 text-center"
+        className="text-center md:text-left md:flex-1"
       >
         {/* Badge */}
         <motion.div
@@ -258,7 +215,7 @@ export function HeroHome() {
         {/* Description */}
         <motion.p
           variants={fadeUp}
-          className="mx-auto mt-5 max-w-[520px] text-lg leading-[1.7] text-neutral-600"
+          className="mx-auto mt-5 max-w-[520px] text-lg leading-[1.7] text-neutral-600 md:mx-0"
         >
           Skattio guidar dig genom deklarationen steg för steg &mdash; med AI
           som förklarar, beräknar och ser till att allt blir rätt.
@@ -267,7 +224,7 @@ export function HeroHome() {
         {/* Button */}
         <motion.div
           variants={fadeUp}
-          className="mt-9 flex items-center justify-center"
+          className="mt-9 flex items-center justify-center md:justify-start"
         >
           <Button
             asChild
@@ -282,7 +239,7 @@ export function HeroHome() {
 
       {/* Savings graph card */}
       <div
-        className="relative mx-auto mt-16 max-w-[900px] px-6"
+        className="relative mx-auto mt-8 max-w-[389px] md:mx-0 md:mt-0 md:w-[389px] md:flex-shrink-0"
         ref={frameRef}
       >
         <motion.div
@@ -296,25 +253,25 @@ export function HeroHome() {
           className="relative z-1 overflow-hidden rounded-2xl border border-neutral-200/60 bg-white ring-1 ring-black/2 shadow-[0_0_0_1px_rgba(10,15,30,0.02),0_4px_12px_rgba(10,15,30,0.04),0_20px_60px_rgba(10,15,30,0.08)]"
         >
           {/* Header */}
-          <div className="border-b border-neutral-100 px-5 py-4 sm:px-7 sm:py-5">
-            <h3 className="font-heading text-sm font-semibold text-neutral-950 sm:text-base">
+          <div className="border-b border-neutral-100 px-4 py-3.5">
+            <h3 className="font-heading text-[13px] font-semibold text-neutral-950">
               Avdrag vid bostadsförsäljning
             </h3>
-            <p className="mt-0.5 text-xs text-neutral-500">
+            <p className="mt-0.5 text-[11px] leading-tight text-neutral-500">
               Genomsnittlig besparing med Skattios AI-stöd
             </p>
           </div>
 
           {/* Graph body */}
-          <div className="px-5 py-5 sm:px-7 sm:py-6">
+          <div className="px-4 py-4">
             {/* Legend */}
-            <div className="mb-5 flex items-center gap-5 sm:mb-6">
-              <span className="flex items-center gap-1.5 text-xs text-neutral-500">
-                <span className="inline-block h-2 w-2 rounded-full bg-navy-200" />
+            <div className="mb-2 flex items-center gap-3">
+              <span className="flex items-center gap-1 text-[11px] text-neutral-500">
+                <span className="inline-block h-1.5 w-1.5 rounded-full bg-navy-200" />
                 Utan Skattio
               </span>
-              <span className="flex items-center gap-1.5 text-xs text-neutral-500">
-                <span className="inline-block h-2 w-2 rounded-full bg-success" />
+              <span className="flex items-center gap-1 text-[11px] text-neutral-500">
+                <span className="inline-block h-1.5 w-1.5 rounded-full bg-success" />
                 Med Skattio
               </span>
             </div>
@@ -474,13 +431,13 @@ export function HeroHome() {
                 frameInView ? { opacity: 1 } : reducedMotion ? { opacity: 1 } : { opacity: 0 }
               }
               transition={{ duration: 0.5, ease: "easeOut", delay: 1.5 }}
-              className="mt-5 flex items-center justify-between border-t border-neutral-100 pt-4 sm:mt-6 sm:pt-5"
+              className="mt-2 flex items-center justify-between border-t border-neutral-100 pt-2"
             >
-              <span className="font-heading text-sm font-semibold text-neutral-950">
+              <span className="font-heading text-[11px] font-semibold text-neutral-950">
                 Totala avdrag
               </span>
-              <div className="flex items-center gap-4 sm:gap-6">
-                <span className="text-xs tabular-nums text-neutral-400 sm:text-sm">
+              <div className="flex items-center gap-2">
+                <span className="text-[10px] tabular-nums text-neutral-400">
                   <AnimatedValue
                     target={totalUtan}
                     animate={frameInView}
@@ -488,7 +445,7 @@ export function HeroHome() {
                     suffix=" kr"
                   />
                 </span>
-                <span className="font-heading text-sm font-bold tabular-nums text-success sm:text-base">
+                <span className="font-heading text-[11px] font-bold tabular-nums text-success">
                   <AnimatedValue
                     target={totalMed}
                     animate={frameInView}
@@ -501,38 +458,10 @@ export function HeroHome() {
           </div>
         </motion.div>
 
-        {/* Floating badges */}
-
-        {/* Badge: "4 avdrag hittade" — bottom right, outside card */}
-        <FloatingBadge
-          isVisible={frameInView}
-          entryDelay={1.2}
-          floatDuration={5}
-          floatDistance={5}
-          className="absolute -bottom-5 -right-6 z-2 max-md:hidden"
-        >
-          <div className="flex items-center gap-2 rounded-[10px] border border-neutral-200/60 bg-white/90 backdrop-blur-sm px-3.5 py-2 font-heading text-xs font-semibold text-neutral-950 shadow-[0_4px_16px_rgba(10,15,30,0.08)]">
-            <span className="flex h-4.5 w-4.5 items-center justify-center rounded-full bg-success/15">
-              <Check className="h-3 w-3 text-success" />
-            </span>
-            4 avdrag hittade
-          </div>
-        </FloatingBadge>
-
-        {/* Badge: "AI-hjälp" — top right, outside card */}
-        <FloatingBadge
-          isVisible={frameInView}
-          entryDelay={1.4}
-          floatDuration={4.5}
-          floatDistance={6}
-          className="absolute -top-4 -right-8 z-2 max-md:hidden"
-        >
-          <div className="flex items-center gap-2 rounded-[10px] border border-transparent bg-navy-950/95 backdrop-blur-sm px-3.5 py-2 font-heading text-xs font-semibold text-white shadow-[0_4px_16px_rgba(10,15,30,0.08)]">
-            <Sparkles className="h-3.5 w-3.5" />
-            AI-hjälp
-          </div>
-        </FloatingBadge>
+        {/* Floating badges — hidden at this compact card size */}
       </div>
+
+      </div>{/* end two-column layout */}
     </section>
   );
 }
